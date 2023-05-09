@@ -1,6 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -11,16 +8,61 @@ datasource db {
 }
 
 model User {
-  id       String    @id @default(auto()) @map("_id") @db.ObjectId
-  username String    @unique
+  id       String  @id @default(auto()) @map("_id") @db.ObjectId
+  username String  @unique
   password String
-  sessions Session[]
+  orders   Order[]
 }
 
-model Session {
-  id        String   @id @default(auto()) @map("_id") @db.ObjectId
-  valid     Boolean
-  userId    String   @db.ObjectId
-  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
-  createdAt DateTime @default(now())
+model Order {
+  id           String     @id @default(auto()) @map("_id") @db.ObjectId
+  User         User?      @relation(fields: [userId], references: [id])
+  userId       String?    @db.ObjectId
+  customerName String
+  pizzas       Pizza[]
+  wings        Wings[]
+  sides        Sides[]
+  desserts     Desserts[]
+  drinks       Drinks[]
+  sauces       Sauces[]
+}
+
+type Pizza {
+  size                    String
+  crust                   String
+  sauce                   String
+  toppings                String[]
+  crustFlavor             String
+  quantity                Int
+  specialBakeInstructions String
+  specialCutInstructions  String
+  isSpecialtyPizza        Boolean
+}
+
+type Wings {
+  size     String
+  bone     Boolean
+  sauce    String
+  quantity Int
+}
+
+type Sides {
+  sideOption String
+  quantity   Int
+}
+
+type Desserts {
+  dessertOption String
+  quantity      Int
+}
+
+type Drinks {
+  drinkOption String
+  size        String
+  quantity    Int
+}
+
+type Sauces {
+  sauceOption String
+  quantity    Int
 }

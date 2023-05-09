@@ -1,9 +1,14 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const ExploreMenu: React.FC = () => {
+  const router = useRouter();
   return (
     <div className="grid grid-cols-3 gap-1 sm:gap-3 md:gap-4 lg:grid-cols-7 lg:gap-3 xl:gap-4">
-      <div className="flex flex-col justify-between rounded-md bg-gradient-to-br from-green-700 to-green-800 text-white shadow shadow-green-800 hover:from-green-600 hover:to-green-700">
+      <button
+        onClick={() => void router.push("/menu/pizza")}
+        className="rounded-md bg-gradient-to-br from-green-700 to-green-800 text-zinc-50 shadow shadow-green-800 hover:from-green-600 hover:to-green-700"
+      >
         <div className="relative aspect-video w-28 rounded-t-md sm:w-32 md:w-40 lg:w-32 xl:w-40">
           <Image
             src="/pizza-main.png"
@@ -13,8 +18,11 @@ const ExploreMenu: React.FC = () => {
           />
         </div>
         <div className="text-center text-xl">Pizza</div>
-      </div>
-      <div className="flex flex-col justify-between rounded-md bg-gradient-to-br from-green-700 to-green-800 text-white shadow shadow-green-800 hover:from-green-600 hover:to-green-700">
+      </button>
+      <button
+        onClick={() => void router.push("/menu/wings")}
+        className="rounded-md bg-gradient-to-br from-green-700 to-green-800 text-zinc-50 shadow shadow-green-800 hover:from-green-600 hover:to-green-700"
+      >
         <div className="relative aspect-video w-28 rounded-t-md sm:w-32 md:w-40 lg:w-32 xl:w-40">
           <Image
             src="/wings.jpg"
@@ -24,8 +32,11 @@ const ExploreMenu: React.FC = () => {
           />
         </div>
         <div className="text-center text-xl">Wings</div>
-      </div>
-      <div className="flex flex-col justify-between rounded-md bg-gradient-to-br from-green-700 to-green-800 text-white shadow shadow-green-800 hover:from-green-600 hover:to-green-700">
+      </button>
+      <button
+        onClick={() => void router.push("/menu/sides")}
+        className="rounded-md bg-gradient-to-br from-green-700 to-green-800 text-zinc-50 shadow shadow-green-800 hover:from-green-600 hover:to-green-700"
+      >
         <div className="relative aspect-video w-28 rounded-t-md sm:w-32 md:w-40 lg:w-32 xl:w-40">
           <Image
             src="/breadsticks.jpg"
@@ -35,8 +46,11 @@ const ExploreMenu: React.FC = () => {
           />
         </div>
         <div className="text-center text-xl">Sides</div>
-      </div>
-      <div className="flex flex-col justify-between rounded-md bg-gradient-to-br from-green-700 to-green-800 text-white shadow shadow-green-800 hover:from-green-600 hover:to-green-700">
+      </button>
+      <button
+        onClick={() => void router.push("/menu/desserts")}
+        className="rounded-md bg-gradient-to-br from-green-700 to-green-800 text-zinc-50 shadow shadow-green-800 hover:from-green-600 hover:to-green-700"
+      >
         <div className="relative aspect-video w-28 rounded-t-md sm:w-32 md:w-40 lg:w-32 xl:w-40">
           <Image
             src="/rolls.jpg"
@@ -46,8 +60,11 @@ const ExploreMenu: React.FC = () => {
           />
         </div>
         <div className="text-center text-xl">Desserts</div>
-      </div>
-      <div className="flex flex-col justify-between rounded-md bg-gradient-to-br from-green-700 to-green-800 text-white shadow shadow-green-800 hover:from-green-600 hover:to-green-700">
+      </button>
+      <button
+        onClick={() => void router.push("/menu/drinks")}
+        className="rounded-md bg-gradient-to-br from-green-700 to-green-800 text-zinc-50 shadow shadow-green-800 hover:from-green-600 hover:to-green-700"
+      >
         <div className="relative aspect-video w-28 rounded-t-md sm:w-32 md:w-40 lg:w-32 xl:w-40">
           <Image
             src="/drinks.jpg"
@@ -57,8 +74,11 @@ const ExploreMenu: React.FC = () => {
           />
         </div>
         <div className="text-center text-xl">Drinks</div>
-      </div>
-      <div className="flex flex-col justify-between rounded-md bg-gradient-to-br from-green-700 to-green-800 text-white shadow shadow-green-800 hover:from-green-600 hover:to-green-700">
+      </button>
+      <button
+        onClick={() => void router.push("/menu/sauces")}
+        className="rounded-md bg-gradient-to-br from-green-700 to-green-800 text-zinc-50 shadow shadow-green-800 hover:from-green-600 hover:to-green-700"
+      >
         <div className="relative aspect-video w-28 rounded-t-md sm:w-32 md:w-40 lg:w-32 xl:w-40">
           <Image
             src="/sauce.jpg"
@@ -68,14 +88,17 @@ const ExploreMenu: React.FC = () => {
           />
         </div>
         <div className="text-center text-xl">Sauces</div>
-      </div>
-      <div className="green-700 col-span-3 flex justify-center text-gray-800 lg:col-span-1 lg:justify-start">
-        <button className="flex flex-row justify-center gap-1 text-xl font-semibold text-gray-800 hover:text-green-800 lg:flex-col lg:gap-0">
+      </button>
+      <button
+        onClick={() => void router.push("/menu")}
+        className="green-700 col-span-3 text-left lg:col-span-1 lg:justify-start"
+      >
+        <div className="flex flex-row justify-center gap-1 text-xl font-semibold text-gray-800 hover:text-green-800 lg:flex-col lg:gap-0">
           <div>View</div>
           <div>Full</div>
           <div>Menu ➧</div>
-        </button>
-      </div>
+        </div>
+      </button>
     </div>
   );
 };

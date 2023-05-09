@@ -30,7 +30,6 @@ const processEnv = {
   NODE_ENV: process.env.NODE_ENV,
   PUBLIC_KEY: process.env.PUBLIC_KEY,
   PRIVATE_KEY: process.env.PRIVATE_KEY,
-  // NEXT_PUBLIC_CLIENTVAR: process.env.NEXT_PUBLIC_CLIENTVAR,
 };
 
 // Don't touch the part below
