@@ -1,4 +1,4 @@
-import { createUserSchema, loginUserSchema } from "../auth/schema";
+import { createUserSchema, logInUserSchema } from "../auth/schema";
 import { registerHandler, loginHandler } from "../auth/controller";
 
 import { createTRPCRouter, publicProcedure } from "../trpc";
@@ -9,7 +9,7 @@ export const userRouter = createTRPCRouter({
   .mutation(({ input }) => registerHandler({ input })),
 
   logInUser: publicProcedure
-  .input(loginUserSchema)
+  .input(logInUserSchema)
   .mutation(({ input }) => loginHandler({ input }))
 }
 );
