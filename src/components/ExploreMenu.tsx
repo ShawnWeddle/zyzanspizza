@@ -93,7 +93,7 @@ const ExploreMenu: React.FC = () => {
         onClick={() => void router.push("/menu")}
         className="green-700 col-span-3 text-left lg:col-span-1 lg:justify-start"
       >
-        <div className="flex flex-row justify-center gap-1 text-xl font-semibold text-gray-800 hover:text-green-800 lg:flex-col lg:gap-0">
+        <div className="flex flex-row justify-center gap-1 text-xl font-semibold hover:text-green-800 lg:flex-col lg:gap-0">
           <div>View</div>
           <div>Full</div>
           <div>Menu ➧</div>

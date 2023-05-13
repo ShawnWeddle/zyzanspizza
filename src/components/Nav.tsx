@@ -5,7 +5,7 @@ import { MdAccountCircle } from "react-icons/md";
 const NavBar: React.FC = () => {
   const router = useRouter();
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center bg-green-800 text-zinc-50 sm:gap-16">
+    <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center bg-green-800 text-zinc-50 sm:gap-16 sm:bg-blue-800 md:bg-purple-800 lg:bg-red-800 xl:bg-orange-700">
       <div className="flex justify-center">
         <div className="px-2">
           <button onClick={() => void router.push("/")}>

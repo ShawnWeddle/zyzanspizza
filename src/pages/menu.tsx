@@ -2,9 +2,12 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import NavBar from "~/components/Nav";
 import PizzaMenu from "~/components/Menu/Pizzas";
+import SpecialtyPizzasMenu from "~/components/Menu/SpecialtyPizzas";
 import WingsMenu from "~/components/Menu/Wings";
 import SidesMenu from "~/components/Menu/Sides";
 import DessertsMenu from "~/components/Menu/Desserts";
+import DrinksMenu from "~/components/Menu/Drinks";
+import SaucesMenu from "~/components/Menu/Sauces";
 
 const Menu: NextPage = () => {
   return (
@@ -18,9 +21,12 @@ const Menu: NextPage = () => {
         <NavBar />
         <div className="h-16">.</div>
         <PizzaMenu />
+        <SpecialtyPizzasMenu />
         <WingsMenu />
         <SidesMenu />
         <DessertsMenu />
+        <DrinksMenu />
+        <SaucesMenu />
       </main>
     </>
   );

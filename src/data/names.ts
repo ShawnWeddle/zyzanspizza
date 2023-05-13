@@ -90,7 +90,7 @@ export const drinksOptionsList = [
   "Cola",
   "Diet Cola",
   "Lemon-Lime Soda",
-  "Medical Physician Soda",
+  "Doctor Soda",
   "Orange Soda",
   "Root Beer",
 ] as const;
