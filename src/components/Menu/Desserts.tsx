@@ -4,12 +4,12 @@ const DessertsMenu: React.FC = () => {
   return (
     <div className="flex flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
       <div className="m-2 text-6xl font-semibold">DESSERTS</div>
-      <div className="m-2 grid grid-cols-2 gap-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 sm:m-2 sm:grid-cols-2 sm:gap-2 lg:grid-cols-3">
         <div>
-          <div className="rounded-t bg-gradient-to-br from-green-700 to-green-800 p-1 text-center text-2xl font-semibold text-zinc-50">
+          <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-2xl font-semibold text-zinc-50 sm:rounded-t sm:p-1">
             Big Brownie
           </div>
-          <div className="max-h-full rounded-b border-2 border-gray-500 bg-green-800/10 p-1">
+          <div className="max-h-full border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
             <p>
               Who doesn&apos;t love big, fudgy, chocolately brownies? You
               don&apos;t? Then you can lick the chocolate syrup off the top.
@@ -20,10 +20,10 @@ const DessertsMenu: React.FC = () => {
           </div>
         </div>
         <div>
-          <div className="rounded-t bg-gradient-to-br from-green-700 to-green-800 p-1 text-center text-2xl font-semibold text-zinc-50">
+          <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-2xl font-semibold text-zinc-50 sm:rounded-t sm:p-1">
             Big Cookie
           </div>
-          <div className="max-h-full rounded-b border-2 border-gray-500 bg-green-800/10 p-1">
+          <div className="max-h-full border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
             <p>
               A big, warm, chocolate chip cookie. Designed to be shared, but
               technically you can eat it by yourself.
@@ -34,10 +34,10 @@ const DessertsMenu: React.FC = () => {
           </div>
         </div>
         <div>
-          <div className="rounded-t bg-gradient-to-br from-green-700 to-green-800 p-1 text-center text-2xl font-semibold text-zinc-50">
+          <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-2xl font-semibold text-zinc-50 sm:rounded-t sm:p-1">
             Pull-Apart Cinnamon Rolls
           </div>
-          <div className="max-h-full rounded-b border-2 border-gray-500 bg-green-800/10 p-1">
+          <div className="max-h-full border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
             <p>
               Like Grandma used to make, but better. Bite-sized cinnamon roll
               pieces drizzled with icing.

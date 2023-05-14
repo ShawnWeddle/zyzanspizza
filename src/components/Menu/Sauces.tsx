@@ -17,7 +17,7 @@ const SaucesMenu: React.FC = () => {
       <div className="m-2 text-center text-xl">
         <span className="font-bold"> $0.75 </span> each
       </div>
-      <div className="mb-4 grid grid-cols-6">{SauceOptions}</div>
+      <div className="mb-4 grid grid-cols-2 sm:grid-cols-6">{SauceOptions}</div>
     </div>
   );
 };

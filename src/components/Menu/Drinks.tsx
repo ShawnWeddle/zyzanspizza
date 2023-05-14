@@ -18,7 +18,9 @@ const DrinksMenu: React.FC = () => {
         20 oz <span className="font-bold"> $1.99 </span> ◆ 2-liter{" "}
         <span className="font-bold"> $2.99 </span>
       </div>
-      <div className="m-2 grid grid-cols-6 gap-2">{DrinksOptions}</div>
+      <div className="m-2 grid grid-cols-2 gap-2 sm:grid-cols-6">
+        {DrinksOptions}
+      </div>
     </div>
   );
 };

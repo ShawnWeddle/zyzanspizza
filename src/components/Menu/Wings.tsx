@@ -4,12 +4,12 @@ const WingsMenu: React.FC = () => {
   return (
     <div className="flex flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
       <div className="m-2 text-6xl font-semibold">WINGS</div>
-      <div className="m-2 grid grid-cols-2 gap-2">
+      <div className="grid grid-cols-1 sm:m-2 sm:grid-cols-2 sm:gap-2">
         <div>
-          <div className="rounded-t bg-gradient-to-br from-green-700 to-green-800 p-1 text-center text-2xl font-semibold text-zinc-50">
+          <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-2xl font-semibold text-zinc-50 sm:rounded-t sm:p-1">
             Bone-In Wings
           </div>
-          <div className="max-h-full rounded-b border-2 border-gray-500 bg-green-800/10 p-1">
+          <div className="max-h-full border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
             <p className="m-1">
               Tender, juicy, delicious, and chickeny. Don&apos;t forget the
               dipping sauces and please do not eat the bones.
@@ -36,13 +36,13 @@ const WingsMenu: React.FC = () => {
                 </tbody>
               </table>
               <div className="flex">
-                <div>
-                  <span className="m-1 p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
+                <div className="m-1">
+                  <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
                     Sauces:
                   </span>
                 </div>
-                <div>
-                  <div>Plain (No Sauce)</div>
+                <div className="m-1">
+                  <div className="whitespace-nowrap">Plain (No Sauce)</div>
                   <div>Buffalo</div>
                   <div>BBQ</div>
                   <div>Garlic Parmesan</div>
@@ -52,10 +52,10 @@ const WingsMenu: React.FC = () => {
           </div>
         </div>
         <div>
-          <div className="rounded-t bg-gradient-to-br from-green-700 to-green-800 p-1 text-center text-2xl font-semibold text-zinc-50">
+          <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-2xl font-semibold text-zinc-50 sm:rounded-t sm:p-1">
             Boneless Wings
           </div>
-          <div className="max-h-full rounded-b border-2 border-gray-500 bg-green-800/10 p-1 ">
+          <div className="max-h-full border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
             <p className="m-1">
               Yeah, uh... let me get it boneless. Glorified chicken nuggets.
               Poor source of calcium.

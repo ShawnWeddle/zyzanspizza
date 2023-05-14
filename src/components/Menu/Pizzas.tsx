@@ -11,7 +11,7 @@ const PizzaMenu: React.FC = () => {
       <div className="m-2 text-6xl font-semibold">PIZZA</div>
       <div className="m-2 grid grid-cols-1 md:grid-cols-2">
         <div>
-          <div className="flex">
+          <div className="flex flex-col items-center sm:flex-row sm:items-start">
             <div className="m-1">
               <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
                 Size:
@@ -58,7 +58,7 @@ const PizzaMenu: React.FC = () => {
               </tbody>
             </table>
           </div>
-          <div className="flex">
+          <div className="flex flex-col items-center sm:flex-row sm:items-start">
             <div className="m-1">
               <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
                 Crust:
@@ -69,7 +69,7 @@ const PizzaMenu: React.FC = () => {
               <span className="font-bold"> crispy thin </span> crust
             </div>
           </div>
-          <div className="flex">
+          <div className="flex flex-col items-center sm:flex-row sm:items-start">
             <div className="m-1">
               <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
                 Sauces:
@@ -85,7 +85,7 @@ const PizzaMenu: React.FC = () => {
           </div>
         </div>
         <div>
-          <div className="flex">
+          <div className="flex flex-col items-center sm:flex-row sm:items-start">
             <div className="m-1">
               <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
                 Toppings:
@@ -99,9 +99,9 @@ const PizzaMenu: React.FC = () => {
             </div>
           </div>
           <div className="my-2 mx-3 grid grid-cols-3">{Toppings}</div>
-          <div className="flex">
+          <div className="flex flex-col items-center sm:flex-row sm:items-start">
             <div className="m-1">
-              <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
+              <span className="whitespace-nowrap p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
                 Crust Flavors:
               </span>
             </div>
