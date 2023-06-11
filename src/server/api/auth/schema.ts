@@ -10,7 +10,7 @@ export const createUserSchema = object({
     .min(1, "Last name must be at least 1 character")
     .max(32, "Last name must be less than 32 characters")
     .regex(/^[a-zA-Z0-9-]*$/, "Last name must only contain letters, numbers, and hyphens"),
-  email: string({ required_error: "Last name is required" })
+  email: string({ required_error: "Email is required" })
     .email("Invalid email address")
     .max(255, "There is no way your email is that long"),
   password: string({ required_error: "Password is required" })

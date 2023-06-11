@@ -59,7 +59,7 @@ const RegisterForm: React.FC = () => {
   });
 
   return (
-    <div className="">
+    <div className="flex flex-col justify-between">
       <p className="mt-2 text-center text-3xl text-zinc-50">Sign Up</p>
       <div className="m-5 grid grid-cols-2">
         <p className="col-span-2 text-lg text-zinc-50">Name</p>

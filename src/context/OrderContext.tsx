@@ -1,10 +1,10 @@
 import { createContext, useReducer } from "react";
-import type { OrderType } from "~/data/ordertypes";
+import type { FullOrderType } from "~/data/ordertypes";
 
 export const OrderContext = createContext<ContextType | null>(null);
 
 type ContextType = {
-  orderState: OrderReducerState;
+  orderState: FullOrderType;
   orderDispatch: React.Dispatch<OrderReducerAction>;
 };
 
@@ -12,9 +12,7 @@ type OrderContextProviderProps = {
   children: React.ReactNode;
 };
 
-type OrderReducerState = {
-  order: OrderType;
-};
+type OrderReducerState = FullOrderType;
 
 type OrderReducerAction = {
   type: "CHANGE";
@@ -26,13 +24,9 @@ export const orderReducer = (
   action: OrderReducerAction
 ) => {
   switch (action.type) {
-    case "CHANGE":
-      return {
-        order: action.payload.order,
-      };
-
-    default:
-      return state;
+    case "CHANGE": {
+      return action.payload;
+    }
   }
 };
 
@@ -40,7 +34,13 @@ export const OrderContextProvider = ({
   children,
 }: OrderContextProviderProps) => {
   const [orderState, orderDispatch] = useReducer(orderReducer, {
-    order: { CustomerName: "" },
+    Pizzas: [],
+    Wings: [],
+    Sides: [],
+    Desserts: [],
+    Drinks: [],
+    Sauces: [],
+    CustomerName: "",
   });
 
   return (

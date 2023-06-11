@@ -1,3 +1,13 @@
+export const orderCategories = [
+  "Create your own pizza",
+  "Specialty Pizzas",
+  "Wings",
+  "Sides",
+  "Desserts",
+  "Drinks",
+  "Sauces",
+] as const;
+
 export const pizzaToppingsList= [
   "Pepperoni",
   "Italian Sausage",
@@ -28,34 +38,34 @@ export const pizzaSauceList = [
 ] as const;
 
 export const pizzaSizeList = [
-  "small",
-  "medium",
-  "large",
-  "extra large",
+  "Small",
+  "Medium",
+  "Large",
+  "Extra Large",
 ] as const;
 
 export const pizzaCrustList = [
-  "thin",
-  "original",
+  "Original",
+  "Thin",
 ] as const;
 
 export const pizzaCrustFlavorList = [
-  "none",
-  "garlic",
-  "parmesan",
-  "garlic parmesan",
+  "None",
+  "Garlic",
+  "Parmesan",
+  "Garlic Parmesan",
 ] as const;
 
 export const specialCutList = [
-  "triangle cut",
-  "square cut",
-  "no cut",
+  "Triangle Cut",
+  "Square Cut",
+  "No Cut",
 ] as const;
 
 export const specialBakeList = [
-  "normal",
-  "well done",
-  "light bake",
+  "Normal",
+  "Well Done",
+  "Light Bake",
 ] as const;
 
 export const wingsSizeList = [
@@ -113,6 +123,13 @@ export const sauceOptionsList = [
   "Blue Cheese",
   "Icing",
 ] as const;
+
+export const sizeToInches: { [key: string] : number }= {
+  "Small": 10,
+  "Medium": 12,
+  "Large": 14,
+  "Extra Large": 16
+} as const;
 
 export const List = [
   
