@@ -30,6 +30,8 @@ model Order {
 }
 
 type Pizza {
+  id                      String
+  foodType                String
   size                    String
   crust                   String
   sauce                   String
@@ -42,6 +44,8 @@ type Pizza {
 }
 
 type Wings {
+  id       String
+  foodType String
   size     String
   bone     Boolean
   sauce    String
@@ -49,22 +53,30 @@ type Wings {
 }
 
 type Sides {
+  id         String
+  foodType   String
   sideOption String
   quantity   Int
 }
 
 type Desserts {
+  id            String
+  foodType      String
   dessertOption String
   quantity      Int
 }
 
 type Drinks {
+  id          String
+  foodType    String
   drinkOption String
   size        String
   quantity    Int
 }
 
 type Sauces {
+  id          String
+  foodType    String
   sauceOption String
   quantity    Int
 }

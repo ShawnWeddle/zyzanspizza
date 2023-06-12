@@ -135,7 +135,7 @@ export const List = [
   
 ] as const;
 
-export const specialtyPizzas: [string, string][] = [
+export const specialtyPizzaDescriptions: [string, string][] = [
   ["Deluxe", "The one with everything on it. Pepperoni, Italian Sausage, Mushroom, Onion, and Green Pepper."],
   ["Many Meat", "Some of the meats, but not all. Pepperoni, Italian Sausage, Beef, Ham, and Bacon."],
   ["Hawaiian", "Say 'Aloha' (Hello AND Goodbye) to Ham, Chicken, Bacon, and Pineapple."],
@@ -145,4 +145,16 @@ export const specialtyPizzas: [string, string][] = [
   ["Zesty Zyzan", "Our founder's favorite. Pepperoni, Salami, Spicy Sausage, and Banana Pepper."],
   ["Chicken Bacon Ranch", "Ranch dressing base with Chicken, Bacon, and Diced Tomato."],
   ["Veggie", "The least unhealthy option. Black Olives, Mushroom, Green Pepper, Diced Tomato, and Spinach"],
+];
+
+export const specialtyPizzaToppings = [
+  {name: "Deluxe", toppings: ["Pepperoni", "Italian Sausage", "Mushroom", "Onion", "Green Pepper"]},
+  {name: "Many Meat", toppings: ["Pepperoni", "Italian Sausage", "Beef", "Ham", "Bacon"]},
+  {name: "Hawaiian", toppings: ["Ham", "Chicken", "Bacon", "Pineapple"]},
+  {name: "BBQ Chicken", toppings: ["Chicken", "Bacon", "Onion"]},
+  {name: "Extreme Pepperoni", toppings: ["Double Pepperoni", "Cheddar Cheese", "Extra Cheese"]},
+  {name: "Buffalo Chicken", toppings: ["Chicken", "Bacon", "Onion"]},
+  {name: "Zesty Zyzan", toppings: ["Pepperoni", "Salami", "Spicy Sausage", "Banana Pepper"]},
+  {name: "Chicken Bacon Ranch", toppings: ["Chicken", "Bacon", "Diced Tomato"]},
+  {name: "Veggie", toppings: ["Mushroom", "Green Pepper", "Black Olives", "Diced Tomato", "Spinach"]},
 ]

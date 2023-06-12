@@ -36,9 +36,8 @@ const RegisterForm: React.FC = () => {
             setSignUpErrors([]);
             setIsSignedUp(true);
           },
-          onError(error) {
-            console.log(error);
-            setSignUpErrors(["This username is already taken"]);
+          onError() {
+            setSignUpErrors(["This email is already in use"]);
           },
         }
       );
@@ -133,6 +132,11 @@ const RegisterForm: React.FC = () => {
           Sign Up
         </button>
       </div>
+      {isSignedUp && (
+        <div className="m-1 rounded bg-red-50/70 p-2 text-center">
+          Thank you for signing up! Log in to place an order
+        </div>
+      )}
       {signUpErrors && <div className="mx-1 mb-2">{signUpErrorList}</div>}
     </div>
   );

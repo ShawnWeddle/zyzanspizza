@@ -1,8 +1,8 @@
 import Image from "next/image";
-import { specialtyPizzas } from "~/data/names";
+import { specialtyPizzaDescriptions } from "~/data/names";
 
 const SpecialtyPizzasMenu: React.FC = () => {
-  const Specialties = specialtyPizzas.map((item, index) => {
+  const Specialties = specialtyPizzaDescriptions.map((item, index) => {
     return (
       <div key={index}>
         <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-xl text-zinc-50 sm:rounded-t sm:p-0">

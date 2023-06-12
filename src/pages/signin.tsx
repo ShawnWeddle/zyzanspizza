@@ -15,10 +15,9 @@ const SignIn: NextPage = () => {
       <main className="dark flex min-h-screen flex-col items-center bg-gradient-to-r from-zinc-50 via-amber-50 to-zinc-50 dark:bg-gradient-to-br dark:from-zinc-700 dark:to-zinc-800 dark:text-zinc-50">
         <NavBar />
         <div className="h-16">.</div>
-        <div className="my-4 rounded-lg bg-gradient-to-b from-green-700 to-green-800">
-          <div className="flex justify-center">
+        <div className="my-4 rounded-lg bg-gradient-to-b from-green-700 to-green-800 sm:max-w-screen-sm md:max-w-screen-md">
+          <div className="grid grid-cols-2">
             <RegisterForm />
-            <div className="w-0.5 bg-zinc-50"></div>
             <LogInForm />
           </div>
           <div className="h-0.5 bg-zinc-50"></div>

@@ -1,7 +1,7 @@
 import { useState } from "react";
-import type { FormEventHandler } from "react";
 import { api } from "../../utils/api";
 import { logInUserSchema } from "~/server/api/auth/schema";
+import { useAuthContext } from "~/hooks/useAuthContext";
 
 const LogInForm: React.FC = () => {
   const [email, setEmail] = useState<string>("");
@@ -9,6 +9,9 @@ const LogInForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState<boolean>(false);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
   const [logInErrors, setLogInErrors] = useState<string[]>([]);
+
+  const { authState, authDispatch } = useAuthContext();
+  const user = authState.user;
 
   const logInUser = api.user.logInUser.useMutation();
 
@@ -24,13 +27,26 @@ const LogInForm: React.FC = () => {
           password: password,
         },
         {
-          onSuccess() {
+          onSuccess(data) {
+            authDispatch({
+              type: "LOGIN",
+              payload: {
+                token: data.token,
+                userId: data.user.userId,
+                email: data.user.email,
+                firstName: data.user.firstName,
+                lastName: data.user.lastName,
+              },
+            });
             setLogInErrors([]);
             setIsLoggedIn(true);
           },
           onError(error) {
-            console.log(error);
-            setLogInErrors(["Unexpected Log In Error has occurred"]);
+            if (error.data?.httpStatus === 400) {
+              setLogInErrors(["Invalid Email or Password"]);
+            } else {
+              setLogInErrors(["Unexpected Log In Error has occurred"]);
+            }
           },
         }
       );
@@ -50,61 +66,83 @@ const LogInForm: React.FC = () => {
     );
   });
 
-  return (
-    <div className="flex flex-col justify-between">
-      <p className="mt-2 text-center text-3xl text-zinc-50">Log In</p>
-      <div className="m-5 grid grid-cols-2">
-        <p className="col-span-2 text-lg text-zinc-50">Email</p>
-        <input
-          className="col-span-2 my-1 rounded bg-white/70 pl-1"
-          type="text"
-          placeholder="Enter Email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-        <p className="text-lg text-zinc-50">Password</p>
-        <input
-          className="my-1 rounded bg-white/70 pl-1"
-          type={showPassword ? "text" : "password"}
-          placeholder="Enter password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-        <div></div>
-        <div className="flex justify-center">
-          <input
-            id="log-in-show-password-input"
-            className="m-0.5"
-            type="checkbox"
-            checked={showPassword}
-            onChange={(e) => {
-              if (e.target.checked) {
-                setShowPassword(true);
-              } else {
-                setShowPassword(false);
-              }
+  if (user) {
+    return (
+      <div className="flex flex-col items-center justify-center gap-4">
+        <p className="mt-2 text-center text-3xl text-zinc-50">
+          You are logged in as {user.email}
+        </p>
+        <div className="mb-2 flex justify-center">
+          <button
+            onClick={() => {
+              authDispatch({ type: "LOGOUT", payload: null });
             }}
-          />
-          <label
-            htmlFor="log-in-show-password-input"
-            className="text-sm text-zinc-50"
+            className="rounded-md border-2 border-zinc-50 p-1 text-2xl text-zinc-50 transition hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:shadow-inner hover:shadow-red-600"
           >
-            Show Password
-          </label>
+            Log Out
+          </button>
         </div>
       </div>
-      <div className="mb-2 flex justify-center">
-        <button
-          onClick={handleSubmit}
-          disabled={logInUser.isLoading}
-          className="rounded-md border-2 border-zinc-50 p-1 text-2xl text-zinc-50 transition hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:shadow-inner hover:shadow-red-600"
-        >
-          Log In
-        </button>
-      </div>
-      {logInErrors && <div className="mx-1 mb-2">{logInErrorList}</div>}
-    </div>
-  );
+    );
+  } else {
+    return (
+      <>
+        <div className="flex flex-col justify-between">
+          <p className="mt-2 text-center text-3xl text-zinc-50">Log In</p>
+          <div className="m-5 grid grid-cols-2">
+            <p className="col-span-2 text-lg text-zinc-50">Email</p>
+            <input
+              className="col-span-2 my-1 rounded bg-white/70 pl-1"
+              type="text"
+              placeholder="Enter Email"
+              onChange={(e) => setEmail(e.target.value)}
+              value={email}
+            />
+            <p className="text-lg text-zinc-50">Password</p>
+            <input
+              className="my-1 rounded bg-white/70 pl-1"
+              type={showPassword ? "text" : "password"}
+              placeholder="Enter password"
+              onChange={(e) => setPassword(e.target.value)}
+              value={password}
+            />
+            <div></div>
+            <div className="flex justify-center">
+              <input
+                id="log-in-show-password-input"
+                className="m-0.5"
+                type="checkbox"
+                checked={showPassword}
+                onChange={(e) => {
+                  if (e.target.checked) {
+                    setShowPassword(true);
+                  } else {
+                    setShowPassword(false);
+                  }
+                }}
+              />
+              <label
+                htmlFor="log-in-show-password-input"
+                className="text-sm text-zinc-50"
+              >
+                Show Password
+              </label>
+            </div>
+          </div>
+          <div className="mb-2 flex justify-center">
+            <button
+              onClick={handleSubmit}
+              disabled={logInUser.isLoading}
+              className="rounded-md border-2 border-zinc-50 p-1 text-2xl text-zinc-50 transition hover:bg-gradient-to-br hover:from-red-500 hover:to-red-600 hover:shadow-inner hover:shadow-red-600"
+            >
+              Log In
+            </button>
+          </div>
+          {logInErrors && <div className="mx-1 mb-2">{logInErrorList}</div>}
+        </div>
+      </>
+    );
+  }
 };
 
 export default LogInForm;

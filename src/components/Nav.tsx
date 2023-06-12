@@ -1,9 +1,12 @@
 import { useRouter } from "next/router";
+import { useAuthContext } from "~/hooks/useAuthContext";
 import { FaShoppingCart } from "react-icons/fa";
 import { MdAccountCircle } from "react-icons/md";
 
 const NavBar: React.FC = () => {
   const router = useRouter();
+  const { authState, authDispatch } = useAuthContext();
+  const user = authState.user;
   return (
     <nav className="fixed top-0 left-0 right-0 z-50 flex items-center justify-center bg-green-800 text-zinc-50 sm:gap-16">
       <div className="flex justify-center">
@@ -57,20 +60,32 @@ const NavBar: React.FC = () => {
         </div>
         <div>
           <button
-            onClick={() => void router.push("/signin")}
+            onClick={() => {
+              if (!user) {
+                void router.push("/signin");
+              }
+            }}
             className="px-2 py-6 hover:bg-red-600 sm:hidden"
           >
             <MdAccountCircle />
           </button>
         </div>
-        <div>
-          <button
-            onClick={() => void router.push("/signin")}
-            className="hidden px-2 py-5 hover:bg-red-600 sm:block"
-          >
-            SIGN IN
-          </button>
-        </div>
+        {user ? (
+          <div>
+            <button className="hidden px-2 py-6 hover:bg-red-600 sm:block">
+              <MdAccountCircle />
+            </button>
+          </div>
+        ) : (
+          <div>
+            <button
+              onClick={() => void router.push("/signin")}
+              className="hidden px-2 py-5 hover:bg-red-600 sm:block"
+            >
+              SIGN IN
+            </button>
+          </div>
+        )}
         <div>
           <button
             onClick={() => void router.push("/checkout")}

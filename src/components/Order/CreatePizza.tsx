@@ -99,6 +99,7 @@ const CreatePizzaOrder: React.FC = () => {
           type="checkbox"
           id={topping}
           name="topping_group"
+          checked={pizzaToppings.includes(topping)}
           onChange={(e) => {
             const newTopping = toppingEnum.parse(e.target.id);
             const newToppingList = [...pizzaToppings];
@@ -107,13 +108,11 @@ const CreatePizzaOrder: React.FC = () => {
                 if (newToppingList[i] === newTopping) {
                   newToppingList.splice(i, 1);
                   setPizzaToppings(newToppingList);
-                  console.log(pizzaToppings);
                 }
               }
             } else {
               newToppingList.push(newTopping);
               setPizzaToppings(newToppingList);
-              console.log(pizzaToppings);
             }
           }}
         />
@@ -187,7 +186,7 @@ const CreatePizzaOrder: React.FC = () => {
             >
               -
             </button>
-            <div className="h-8 border-y border-green-800 bg-zinc-50 py-0.5 px-2">
+            <div className="h-8 border-y border-green-800 bg-zinc-50 py-0.5 px-2 dark:text-black">
               {pizzaQuantity}
             </div>
             <button
@@ -201,7 +200,7 @@ const CreatePizzaOrder: React.FC = () => {
           </div>
           <div>
             <div className="flex justify-center">
-              <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold">
+              <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
                 ${pizzaPrice(pizzaQuantity, pizzaSize, pizzaToppings)}
               </div>
               <button className="rounded-r-full  bg-red-500 p-1 pr-2 text-lg text-white">
