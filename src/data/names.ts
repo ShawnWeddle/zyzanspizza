@@ -8,6 +8,18 @@ export const orderCategories = [
   "Sauces",
 ] as const;
 
+export const specialtyPizzaNameList = [
+  "Deluxe",
+  "Many Meat",
+  "Hawaiian",
+  "BBQ Chicken",
+  "Extreme Pepperoni",
+  "Buffalo Chicken",
+  "Zesty Zyzan",
+  "Chicken Bacon Ranch",
+  "Veggie",
+] as const;
+
 export const pizzaToppingsList= [
   "Pepperoni",
   "Italian Sausage",
@@ -124,11 +136,18 @@ export const sauceOptionsList = [
   "Icing",
 ] as const;
 
-export const sizeToInches: { [key: string] : number }= {
+export const sizeToInches = {
   "Small": 10,
   "Medium": 12,
   "Large": 14,
   "Extra Large": 16
+} as const;
+
+export const specialtySizeToPrice = {
+  "Small": 11.49,
+  "Medium": 12.99,
+  "Large": 14.99,
+  "Extra Large": 16.99
 } as const;
 
 export const List = [
@@ -158,3 +177,17 @@ export const specialtyPizzaToppings = [
   {name: "Chicken Bacon Ranch", toppings: ["Chicken", "Bacon", "Diced Tomato"]},
   {name: "Veggie", toppings: ["Mushroom", "Green Pepper", "Black Olives", "Diced Tomato", "Spinach"]},
 ]
+
+export type SpecialtyToppingsType = typeof pizzaToppingsList[number] | "Double Pepperoni" | "Extra Cheese"; 
+
+export const specialtyPizzaToppingsList= {
+  Deluxe: ["Pepperoni", "Italian Sausage", "Mushroom", "Onion", "Green Pepper"],
+  "Many Meat": ["Pepperoni", "Italian Sausage", "Beef", "Ham", "Bacon"],
+  Hawaiian: ["Ham", "Chicken", "Bacon", "Pineapple"],
+  "BBQ Chicken": ["Chicken", "Bacon", "Onion"],
+  "Extreme Pepperoni": ["Double Pepperoni", "Cheddar Cheese", "Extra Cheese"],
+  "Buffalo Chicken": ["Chicken", "Bacon", "Onion"],
+  "Zesty Zyzan": ["Pepperoni", "Salami", "Spicy Sausage", "Banana Pepper"],
+  "Chicken Bacon Ranch": ["Chicken", "Bacon", "Diced Tomato"],
+  Veggie: ["Mushroom", "Green Pepper", "Black Olives", "Diced Tomato", "Spinach"],
+ } as const;

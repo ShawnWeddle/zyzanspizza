@@ -1,7 +1,10 @@
 import type {
   pizzaSizeList,
   pizzaToppingsList,
+
 } from "~/data/names";
+
+import { specialtySizeToPrice } from "~/data/names";
 
 type SizeType = typeof pizzaSizeList[number];
 type ToppingsType = typeof pizzaToppingsList[number];
@@ -27,6 +30,13 @@ export const pizzaPrice = (quantity: number, size: SizeType, toppings: ToppingsT
       break;
     }
   }
-  price = (Math.round(price * 100) / 100);
-  return price * quantity;
+  const priceText = (Math.round(price * quantity * 100) / 100).toFixed(2);
+  return priceText;
+}
+
+export const specialtyPizzaPrice = (quantity: number, size: SizeType) => {
+  let price = 0;
+  price = specialtySizeToPrice[size];
+  const priceText = (Math.round(price * quantity * 100) / 100).toFixed(2);
+  return priceText;
 }

@@ -174,43 +174,9 @@ const CreatePizzaOrder: React.FC = () => {
 
   return (
     <div className="mt-4">
-      <div className="grid grid-cols-3">
-        <div>
-          <div className="m-2 flex justify-center">
-            <button
-              onClick={() => {
-                setPizzaQuantity(pizzaQuantity - 1);
-              }}
-              disabled={pizzaQuantity <= 1}
-              className="h-8 w-8 rounded-l-full bg-green-800 font-mono text-2xl font-bold text-zinc-50 disabled:bg-green-800/50"
-            >
-              -
-            </button>
-            <div className="h-8 border-y border-green-800 bg-zinc-50 py-0.5 px-2 dark:text-black">
-              {pizzaQuantity}
-            </div>
-            <button
-              onClick={() => {
-                setPizzaQuantity(pizzaQuantity + 1);
-              }}
-              className="h-8 w-8 rounded-r-full bg-green-800 font-mono text-2xl font-bold text-zinc-50"
-            >
-              +
-            </button>
-          </div>
-          <div>
-            <div className="flex justify-center">
-              <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-                ${pizzaPrice(pizzaQuantity, pizzaSize, pizzaToppings)}
-              </div>
-              <button className="rounded-r-full  bg-red-500 p-1 pr-2 text-lg text-white">
-                Add to order
-              </button>
-            </div>
-          </div>
-        </div>
-        <div className="col-span-2">
-          <div className="text-lg">
+      <div className="mb-4 bg-gradient-to-br from-green-700 to-green-800 sm:max-w-screen-sm sm:rounded-xl">
+        <div className="p-2">
+          <p className="text-lg text-zinc-50">
             {pizzaQuantity > 1 ? `${pizzaQuantity} ` : ""}
             {sizeToInches[pizzaSize]}&quot; {pizzaCrust}{" "}
             {pizzaQuantity > 1 ? "pizzas" : "pizza"} with {pizzaSauce}
@@ -219,33 +185,71 @@ const CreatePizzaOrder: React.FC = () => {
             {pizzaCrustFlavor !== "None"
               ? `, and ${pizzaCrustFlavor} crust`
               : ""}
-          </div>
+          </p>
           {specialBake !== "Normal" && (
-            <p className="text-lg font-semibold">**{specialBake}**</p>
+            <p className="text-lg font-semibold text-zinc-50">
+              **{specialBake}**
+            </p>
           )}
           {((specialCut !== "Triangle Cut" && pizzaCrust === "Original") ||
             (specialCut !== "Square Cut" && pizzaCrust === "Thin")) && (
-            <p className="text-lg font-semibold">**{specialCut}**</p>
+            <p className="text-lg font-semibold text-zinc-50">
+              **{specialCut}**
+            </p>
           )}
         </div>
-      </div>
-      <div className="grid grid-cols-3">
-        <div>
-          <div>
-            <div>
-              <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
-                Size:
-              </span>
+        <div className="flex justify-start">
+          <div className="m-2 flex justify-center">
+            <button
+              onClick={() => {
+                setPizzaQuantity(pizzaQuantity - 1);
+              }}
+              disabled={pizzaQuantity <= 1}
+              className="h-10 w-10 rounded-l-full border font-mono text-2xl font-bold text-zinc-50 disabled:bg-green-200"
+            >
+              -
+            </button>
+            <div className="h-10 w-10 border-y bg-zinc-50 pt-1 text-center text-lg font-semibold dark:text-black">
+              {pizzaQuantity}
             </div>
-            <div className="m-2">{sizeList}</div>
+            <button
+              onClick={() => {
+                setPizzaQuantity(pizzaQuantity + 1);
+              }}
+              className="h-10 w-10 rounded-r-full border font-mono text-2xl font-bold text-zinc-50"
+            >
+              +
+            </button>
           </div>
+          <div className="m-2 flex justify-center">
+            <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
+              ${pizzaPrice(pizzaQuantity, pizzaSize, pizzaToppings)}
+            </div>
+            <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white">
+              Add to order
+            </button>
+          </div>
+        </div>
+      </div>
+      <div className="grid grid-cols-1 sm:grid-cols-3">
+        <div className="mx-2 grid grid-cols-2 sm:mx-0 sm:grid-cols-1">
           <div>
             <div>
-              <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
-                Crust:
-              </span>
+              <div>
+                <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
+                  Size:
+                </span>
+              </div>
+              <div className="m-2">{sizeList}</div>
             </div>
-            <div className="m-2">{crustList}</div>
+            <div>
+              <div>
+                <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
+                  Crust:
+                </span>
+              </div>
+              <div className="m-2">{crustList}</div>
+            </div>
           </div>
           <div>
             <div>
@@ -256,7 +260,7 @@ const CreatePizzaOrder: React.FC = () => {
             <div className="m-2">{sauceList}</div>
           </div>
         </div>
-        <div className="col-span-2">
+        <div className="mx-2 sm:col-span-2 sm:mx-0">
           <div>
             <div>
               <span className="p-1 font-bold italic text-red-500 dark:rounded-md dark:bg-red-500 dark:text-zinc-50">
