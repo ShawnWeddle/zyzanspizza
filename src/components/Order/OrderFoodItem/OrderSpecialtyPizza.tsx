@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { specialtyPizzaNameList } from "~/data/names";
-import CreateSpecialtyPizza from "./CreateSpecialtyPizza";
+import CreateSpecialtyPizza from "../CreateFoodItem/CreateSpecialtyPizza";
 
 type SpecialtyPizzaNameType = (typeof specialtyPizzaNameList)[number];
 
@@ -12,6 +12,7 @@ const OrderSpecialtyPizza: React.FC = () => {
         name={pizza}
         key={index}
         activePizza={activePizza}
+        setActivePizza={setActivePizza}
       />
     );
   });

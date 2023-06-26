@@ -1,7 +1,12 @@
 import { useState } from "react";
 import { orderCategories } from "~/data/names";
-import CreatePizzaOrder from "./CreatePizza";
-import OrderSpecialtyPizza from "./OrderSpecialtyPizza";
+import CreatePizzaOrder from "./CreateFoodItem/CreatePizza";
+import OrderSpecialtyPizza from "./OrderFoodItem/OrderSpecialtyPizza";
+import OrderWings from "./OrderFoodItem/OrderWings";
+import OrderSides from "./OrderFoodItem/OrderSides";
+import OrderDesserts from "./OrderFoodItem/OrderDesserts";
+import OrderDrinks from "./OrderFoodItem/OrderDrinks";
+import OrderSauces from "./OrderFoodItem/OrderSauces";
 
 const OrderNav: React.FC = () => {
   const [activeCategory, setActiveCategory] = useState<
@@ -47,7 +52,13 @@ const OrderNav: React.FC = () => {
         </div>
       </div>
       <div className="my-2 h-0.5 bg-green-800 lg:my-0"></div>
-      <OrderSpecialtyPizza />
+      {activeCategory === "Create your own pizza" && <CreatePizzaOrder />}
+      {activeCategory === "Specialty Pizzas" && <OrderSpecialtyPizza />}
+      {activeCategory === "Wings" && <OrderWings />}
+      {activeCategory === "Sides" && <OrderSides />}
+      {activeCategory === "Desserts" && <OrderDesserts />}
+      {activeCategory === "Drinks" && <OrderDrinks />}
+      {activeCategory === "Sauces" && <OrderSauces />}
     </div>
   );
 };

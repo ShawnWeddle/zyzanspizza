@@ -5,6 +5,7 @@ import {
   pizzaSizeList,
   pizzaToppingsList,
   specialtyPizzaToppingsList,
+  specialtyPizzaDescriptionsSearch,
   specialtySizeToPrice,
 } from "~/data/names";
 import type {
@@ -17,6 +18,9 @@ type SpecialtyPizzaNameType = (typeof specialtyPizzaNameList)[number];
 type CreateSpecialtyPizzaProps = {
   name: SpecialtyPizzaNameType;
   activePizza: SpecialtyPizzaNameType | undefined;
+  setActivePizza: React.Dispatch<
+    React.SetStateAction<SpecialtyPizzaNameType | undefined>
+  >;
 };
 
 const sizeEnum = z.enum(pizzaSizeList);
@@ -85,51 +89,76 @@ const CreateSpecialtyPizza: React.FC<CreateSpecialtyPizzaProps> = (
     );
   });
 
-  return (
-    <div className="m-2">
-      <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-xl text-zinc-50 sm:rounded-t sm:p-0">
-        {props.name}
-      </div>
-      <div className="flex max-h-full justify-between border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
-        <div className="flex">
-          <form>{sizeList}</form>
-          <div>{toppingList}</div>
+  if (props.activePizza === props.name) {
+    return (
+      <div className="m-2">
+        <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-xl text-zinc-50 sm:rounded-t sm:p-0">
+          {props.name}
         </div>
-        <div className="flex flex-col justify-center">
-          <div className="m-2 flex justify-end">
-            <button
-              onClick={() => {
-                setPizzaQuantity(pizzaQuantity - 1);
-              }}
-              disabled={pizzaQuantity <= 1}
-              className="h-10 w-10 rounded-l-full border bg-green-800 font-mono text-2xl font-bold text-zinc-50 hover:bg-green-600 disabled:bg-green-200"
-            >
-              -
-            </button>
-            <div className="h-10 w-10 border-y bg-zinc-50 pt-1 text-center text-lg font-semibold dark:text-black">
-              {pizzaQuantity}
+        <div className="flex max-h-full justify-between border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
+          <div className="flex">
+            <form>{sizeList}</form>
+            <div>{toppingList}</div>
+          </div>
+          <div className="flex flex-col justify-center">
+            <div className="m-2 flex justify-end">
+              <button
+                onClick={() => {
+                  setPizzaQuantity(pizzaQuantity - 1);
+                }}
+                disabled={pizzaQuantity <= 1}
+                className="h-10 w-10 rounded-l-full border bg-green-800 font-mono text-2xl font-bold text-zinc-50 hover:bg-green-600 disabled:bg-green-200"
+              >
+                -
+              </button>
+              <div className="h-10 w-10 border-y bg-zinc-50 pt-1 text-center text-lg font-semibold dark:text-black">
+                {pizzaQuantity}
+              </div>
+              <button
+                onClick={() => {
+                  setPizzaQuantity(pizzaQuantity + 1);
+                }}
+                className="h-10 w-10 rounded-r-full border bg-green-800 font-mono text-2xl font-bold text-zinc-50 hover:bg-green-600"
+              >
+                +
+              </button>
             </div>
+            <div className="m-2 flex justify-end">
+              <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
+                ${specialtyPizzaPrice(pizzaQuantity, pizzaSize)}
+              </div>
+              <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
+                Add to order
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  } else {
+    return (
+      <div className="m-2">
+        <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-xl text-zinc-50 sm:rounded-t sm:p-0">
+          {props.name}
+        </div>
+        <div className="flex max-h-full justify-between border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
+          <div className="flex">
+            {specialtyPizzaDescriptionsSearch[props.name]}
+          </div>
+          <div className="flex flex-col justify-center">
             <button
+              className="ml-4 rounded-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
               onClick={() => {
-                setPizzaQuantity(pizzaQuantity + 1);
+                props.setActivePizza(props.name);
               }}
-              className="h-10 w-10 rounded-r-full border bg-green-800 font-mono text-2xl font-bold text-zinc-50 hover:bg-green-600"
             >
-              +
+              ORDER
             </button>
           </div>
-          <div className="m-2 flex justify-end">
-            <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-              ${specialtyPizzaPrice(pizzaQuantity, pizzaSize)}
-            </div>
-            <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
-              Add to order
-            </button>
-          </div>
         </div>
       </div>
-    </div>
-  );
+    );
+  }
 };
 
 export default CreateSpecialtyPizza;

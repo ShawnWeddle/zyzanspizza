@@ -95,11 +95,19 @@ export const wingsSauceList = [
 ] as const;
 
 export const sidesOptionsList = [
-  "4-piece Breadsticks",
-  "4-piece Breadsticks",
+  "Breadsticks",
   "Cheese Bread",
-  "16-piece Bread Balls",
-  "32-piece Bread Balls",
+  "Bread Balls",
+] as const;
+
+export const breadsticksSizeList = [
+  "4-piece",
+  "8-piece",
+] as const;
+
+export const breadBallsSizeList = [
+  "16-piece",
+  "32-piece",
 ] as const;
 
 export const dessertsOptionsList = [
@@ -159,12 +167,24 @@ export const specialtyPizzaDescriptions: [string, string][] = [
   ["Many Meat", "Some of the meats, but not all. Pepperoni, Italian Sausage, Beef, Ham, and Bacon."],
   ["Hawaiian", "Say 'Aloha' (Hello AND Goodbye) to Ham, Chicken, Bacon, and Pineapple."],
   ["BBQ Chicken", "BBQ sauce base with Chicken, Bacon, and Onion."],
-  ["Extreme Pepperoni", "Ray! That's Ricky's pepperoni! Double pepp, cheddar and extra cheese. "],
+  ["Extreme Pepperoni", "Ray! That's Ricky's pepperoni! Double pepp, cheddar and extra cheese."],
   ["Buffalo Chicken", "Buffalo sauce base with Chicken, Bacon, and Onion."],
   ["Zesty Zyzan", "Our founder's favorite. Pepperoni, Salami, Spicy Sausage, and Banana Pepper."],
   ["Chicken Bacon Ranch", "Ranch dressing base with Chicken, Bacon, and Diced Tomato."],
   ["Veggie", "The least unhealthy option. Black Olives, Mushroom, Green Pepper, Diced Tomato, and Spinach"],
 ];
+
+export const specialtyPizzaDescriptionsSearch= {
+  Deluxe: "The one with everything on it. Pepperoni, Italian Sausage, Mushroom, Onion, and Green Pepper.",
+  "Many Meat": "Some of the meats, but not all. Pepperoni, Italian Sausage, Beef, Ham, and Bacon.",
+  Hawaiian: "Say 'Aloha' (Hello AND Goodbye) to Ham, Chicken, Bacon, and Pineapple.",
+  "BBQ Chicken": "BBQ sauce base with Chicken, Bacon, and Onion.",
+  "Extreme Pepperoni": "Ray! That's Ricky's pepperoni! Double pepp, cheddar and extra cheese.",
+  "Buffalo Chicken": "Buffalo sauce base with Chicken, Bacon, and Onion.",
+  "Zesty Zyzan": "Our founder's favorite. Pepperoni, Salami, Spicy Sausage, and Banana Pepper.",
+  "Chicken Bacon Ranch": "Ranch dressing base with Chicken, Bacon, and Diced Tomato.",
+  Veggie: "The least unhealthy option. Black Olives, Mushroom, Green Pepper, Diced Tomato, and Spinach",
+ } as const;
 
 export const specialtyPizzaToppings = [
   {name: "Deluxe", toppings: ["Pepperoni", "Italian Sausage", "Mushroom", "Onion", "Green Pepper"]},
@@ -191,3 +211,4 @@ export const specialtyPizzaToppingsList= {
   "Chicken Bacon Ranch": ["Chicken", "Bacon", "Diced Tomato"],
   Veggie: ["Mushroom", "Green Pepper", "Black Olives", "Diced Tomato", "Spinach"],
  } as const;
+
