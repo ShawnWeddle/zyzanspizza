@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { z } from "zod";
 import { useOrderContext } from "~/hooks/useOrderContext";
 import {} from "~/data/names";
 import {} from "~/data/pizzaPrice";
@@ -17,6 +16,8 @@ const CreateBigBrownie: React.FC<CreateDessertProps> = (
   props: CreateDessertProps
 ) => {
   const [brownieQuantity, setBrownieQuantity] = useState<number>(1);
+
+  const { orderState, orderDispatch } = useOrderContext();
 
   return (
     <div className="my-2">
@@ -52,7 +53,22 @@ const CreateBigBrownie: React.FC<CreateDessertProps> = (
               <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
                 ${(Math.round(6.99 * brownieQuantity * 100) / 100).toFixed(2)}
               </div>
-              <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
+              <button
+                className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                onClick={() => {
+                  orderDispatch({
+                    type: "ADD",
+                    payload: [
+                      {
+                        id: crypto.randomUUID(),
+                        foodType: "DESSERTS",
+                        dessertOption: "Big Brownie",
+                        quantity: brownieQuantity,
+                      },
+                    ],
+                  });
+                }}
+              >
                 Add to order
               </button>
             </div>
@@ -85,6 +101,8 @@ const CreateBigCookie: React.FC<CreateDessertProps> = (
   props: CreateDessertProps
 ) => {
   const [cookieQuantity, setCookieQuantity] = useState<number>(1);
+
+  const { orderState, orderDispatch } = useOrderContext();
 
   return (
     <div className="my-2">
@@ -120,7 +138,22 @@ const CreateBigCookie: React.FC<CreateDessertProps> = (
               <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
                 ${(Math.round(6.99 * cookieQuantity * 100) / 100).toFixed(2)}
               </div>
-              <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
+              <button
+                className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                onClick={() => {
+                  orderDispatch({
+                    type: "ADD",
+                    payload: [
+                      {
+                        id: crypto.randomUUID(),
+                        foodType: "DESSERTS",
+                        dessertOption: "Big Cookie",
+                        quantity: cookieQuantity,
+                      },
+                    ],
+                  });
+                }}
+              >
                 Add to order
               </button>
             </div>
@@ -153,6 +186,8 @@ const CreateCinnamonRolls: React.FC<CreateDessertProps> = (
   props: CreateDessertProps
 ) => {
   const [cinnamonRollQuantity, setCinnamonRollQuantity] = useState<number>(1);
+
+  const { orderState, orderDispatch } = useOrderContext();
 
   return (
     <div className="my-2">
@@ -191,7 +226,22 @@ const CreateCinnamonRolls: React.FC<CreateDessertProps> = (
                   2
                 )}
               </div>
-              <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
+              <button
+                className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                onClick={() => {
+                  orderDispatch({
+                    type: "ADD",
+                    payload: [
+                      {
+                        id: crypto.randomUUID(),
+                        foodType: "DESSERTS",
+                        dessertOption: "Pull-Apart Cinnamon Rolls",
+                        quantity: cinnamonRollQuantity,
+                      },
+                    ],
+                  });
+                }}
+              >
                 Add to order
               </button>
             </div>

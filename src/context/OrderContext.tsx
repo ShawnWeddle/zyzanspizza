@@ -1,5 +1,5 @@
-import { createContext, useReducer } from "react";
-import type { FullOrderType, FoodTypes, AnyFoodType } from "~/data/ordertypes";
+import { createContext, useReducer, useEffect } from "react";
+import type { FullOrderType, AnyFoodType } from "~/data/ordertypes";
 
 export const OrderContext = createContext<ContextType | null>(null);
 
@@ -14,36 +14,97 @@ type OrderContextProviderProps = {
 
 type Action = "ADD" | "REMOVE";
 
-type ActionFood = `${Action}-${FoodTypes}`;
-
 type OrderReducerAction = {
-  type: ActionFood;
-  payload: AnyFoodType;
+  type: Action;
+  payload: AnyFoodType[];
 };
 
 export const orderReducer = (
   state: FullOrderType,
   action: OrderReducerAction
 ) => {
+  const { payload } = action;
+  let newState = { ...state };
+
   switch (action.type) {
-    case "ADD-PIZZA": {
-      if (action.payload.foodType === "PIZZA") {
-        const newPizza = action.payload;
-        return { ...state, Pizzas: [...state.Pizzas, newPizza] };
-      } else {
-        return state;
-      }
-    }
-    case "ADD-WINGS": {
-      if (action.payload.foodType === "WINGS") {
-        const newWings = action.payload;
-        return { ...state, Wings: [...state.Wings, newWings] };
-      } else {
-        return state;
+    case "ADD": {
+      for (let i = 0; i < payload.length; i++) {
+        const currentItem = payload[i];
+        if (currentItem) {
+          switch (currentItem.foodType) {
+            case "PIZZA": {
+              if (
+                !newState.Pizzas.find((pizza) => pizza.id === currentItem.id)
+              ) {
+                newState = {
+                  ...newState,
+                  Pizzas: [...newState.Pizzas, currentItem],
+                };
+              }
+              break;
+            }
+            case "WINGS": {
+              if (
+                !newState.Wings.find((wings) => wings.id === currentItem.id)
+              ) {
+                newState = {
+                  ...newState,
+                  Wings: [...newState.Wings, currentItem],
+                };
+              }
+              break;
+            }
+            case "SIDES": {
+              if (!newState.Sides.find((side) => side.id === currentItem.id)) {
+                newState = {
+                  ...newState,
+                  Sides: [...newState.Sides, currentItem],
+                };
+              }
+              break;
+            }
+            case "DESSERTS": {
+              if (
+                !newState.Desserts.find(
+                  (dessert) => dessert.id === currentItem.id
+                )
+              ) {
+                newState = {
+                  ...newState,
+                  Desserts: [...newState.Desserts, currentItem],
+                };
+              }
+              break;
+            }
+            case "DRINKS": {
+              if (
+                !newState.Drinks.find((drink) => drink.id === currentItem.id)
+              ) {
+                newState = {
+                  ...newState,
+                  Drinks: [...newState.Drinks, currentItem],
+                };
+              }
+              break;
+            }
+            case "SAUCES": {
+              if (
+                !newState.Sauces.find((sauce) => sauce.id === currentItem.id)
+              ) {
+                newState = {
+                  ...newState,
+                  Sauces: [...newState.Sauces, currentItem],
+                };
+              }
+              break;
+            }
+          }
+        }
       }
     }
   }
-  return state;
+  localStorage.setItem("order", JSON.stringify(newState));
+  return newState;
 };
 
 export const OrderContextProvider = ({
@@ -56,8 +117,29 @@ export const OrderContextProvider = ({
     Desserts: [],
     Drinks: [],
     Sauces: [],
-    CustomerName: "",
+    CustomerName: null,
   });
+
+  useEffect(() => {
+    const orderCheck: string | null = localStorage.getItem("order");
+    const order: FullOrderType | null = orderCheck //eslint-disable-line
+      ? JSON.parse(orderCheck) //eslint-disable-line
+      : null; //eslint-disable-line
+
+    if (order) {
+      orderDispatch({
+        type: "ADD",
+        payload: [
+          ...order.Pizzas,
+          ...order.Wings,
+          ...order.Sides,
+          ...order.Desserts,
+          ...order.Drinks,
+          ...order.Sauces,
+        ],
+      });
+    }
+  }, []);
 
   return (
     <OrderContext.Provider value={{ orderState, orderDispatch }}>

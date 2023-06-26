@@ -6,7 +6,6 @@ import {
   pizzaToppingsList,
   specialtyPizzaToppingsList,
   specialtyPizzaDescriptionsSearch,
-  specialtySizeToPrice,
 } from "~/data/names";
 import type {
   specialtyPizzaNameList,
@@ -41,6 +40,8 @@ const CreateSpecialtyPizza: React.FC<CreateSpecialtyPizzaProps> = (
     ...activePizzaToppings,
   ]);
   const [pizzaQuantity, setPizzaQuantity] = useState<number>(1);
+
+  const { orderState, orderDispatch } = useOrderContext();
 
   const sizeList = pizzaSizeList.map((size, index) => {
     return (
@@ -123,11 +124,16 @@ const CreateSpecialtyPizza: React.FC<CreateSpecialtyPizzaProps> = (
                 +
               </button>
             </div>
-            <div className="m-2 flex justify-end">
-              <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
+            <div className="m-2 flex flex-col justify-end sm:flex-row">
+              <div className="rounded-t-xl border bg-white p-1 pl-2 text-center text-lg font-semibold dark:text-black sm:rounded-l-full">
                 ${specialtyPizzaPrice(pizzaQuantity, pizzaSize)}
               </div>
-              <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
+              <button
+                className="rounded-b-xl bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400 sm:rounded-r-full"
+                onClick={() => {
+                  console.log("order dispatch");
+                }}
+              >
                 Add to order
               </button>
             </div>

@@ -225,7 +225,29 @@ const CreatePizzaOrder: React.FC = () => {
             <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
               ${pizzaPrice(pizzaQuantity, pizzaSize, pizzaToppings)}
             </div>
-            <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white">
+            <button
+              className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white"
+              onClick={() => {
+                orderDispatch({
+                  type: "ADD",
+                  payload: [
+                    {
+                      id: crypto.randomUUID(),
+                      foodType: "PIZZA",
+                      size: pizzaSize,
+                      crust: pizzaCrust,
+                      sauce: pizzaSauce,
+                      toppings: pizzaToppings,
+                      crustFlavor: pizzaCrustFlavor,
+                      quantity: pizzaQuantity,
+                      specialBakeInstructions: specialBake,
+                      specialCutInstructions: specialCut,
+                      isSpecialtyPizza: false,
+                    },
+                  ],
+                });
+              }}
+            >
               Add to order
             </button>
           </div>

@@ -152,15 +152,17 @@ const CreateWings: React.FC = () => {
               className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
               onClick={() => {
                 orderDispatch({
-                  type: "ADD-WINGS",
-                  payload: {
-                    id: "",
-                    foodType: "WINGS",
-                    quantity: wingsQuantity,
-                    size: wingsSize,
-                    bone: wingsBone === "Bone-in",
-                    sauce: wingsSauce,
-                  },
+                  type: "ADD",
+                  payload: [
+                    {
+                      id: crypto.randomUUID(),
+                      foodType: "WINGS",
+                      quantity: wingsQuantity,
+                      size: wingsSize,
+                      bone: wingsBone === "Bone-in",
+                      sauce: wingsSauce,
+                    },
+                  ],
                 });
               }}
             >

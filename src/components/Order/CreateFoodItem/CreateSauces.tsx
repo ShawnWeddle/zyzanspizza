@@ -9,8 +9,8 @@ type SauceProps = {
 const CreateSauces: React.FC<SauceProps> = (props: SauceProps) => {
   const [sauceQuantity, setSauceQuantity] = useState<number>(0);
   return (
-    <div className="flex justify-between p-2 text-xl even:bg-gradient-to-br even:from-green-700 even:to-green-800 even:text-zinc-50">
-      <p>{props.name}</p>
+    <div className="flex justify-between p-2 text-xl sm:mx-2">
+      <p className="mr-1 whitespace-nowrap">{props.name}</p>
       <div className="flex">
         <button
           className="w-6 rounded-l border bg-green-800 font-bold text-zinc-50 disabled:bg-green-200"

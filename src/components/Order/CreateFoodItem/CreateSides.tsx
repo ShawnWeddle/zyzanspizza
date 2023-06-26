@@ -1,11 +1,9 @@
 import { useState } from "react";
 import { z } from "zod";
 import { useOrderContext } from "~/hooks/useOrderContext";
-import { useOrderHandler } from "~/data/orderHandler";
 import { breadsticksSizeList, breadBallsSizeList } from "~/data/names";
 import { breadBallsPrice, breadsticksPrice } from "~/data/pizzaPrice";
 import type { sidesOptionsList } from "~/data/names";
-import type { SidesType } from "~/data/ordertypes";
 
 type SidesList = (typeof sidesOptionsList)[number];
 type StickSizeList = (typeof breadsticksSizeList)[number];
@@ -83,7 +81,23 @@ const CreateBreadsticks: React.FC<CreateSideProps> = (
               <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
                 ${breadsticksPrice(breadstickQuantity, breadsticksSize)}
               </div>
-              <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
+              <button
+                className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                onClick={() => {
+                  orderDispatch({
+                    type: "ADD",
+                    payload: [
+                      {
+                        id: crypto.randomUUID(),
+                        foodType: "SIDES",
+                        size: breadsticksSize,
+                        sideOption: "Breadsticks",
+                        quantity: breadstickQuantity,
+                      },
+                    ],
+                  });
+                }}
+              >
                 Add to order
               </button>
             </div>
@@ -116,6 +130,8 @@ const CreateBreadballs: React.FC<CreateSideProps> = (
     useState<BallSizeList>("16-piece");
 
   const [breadballQuantity, setBreadballQuantity] = useState<number>(1);
+
+  const { orderState, orderDispatch } = useOrderContext();
 
   const sizeList = breadBallsSizeList.map((size, index) => {
     return (
@@ -172,7 +188,23 @@ const CreateBreadballs: React.FC<CreateSideProps> = (
               <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
                 ${breadBallsPrice(breadballQuantity, breadballsSize)}
               </div>
-              <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
+              <button
+                className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                onClick={() => {
+                  orderDispatch({
+                    type: "ADD",
+                    payload: [
+                      {
+                        id: crypto.randomUUID(),
+                        foodType: "SIDES",
+                        size: breadballsSize,
+                        sideOption: "Bread Balls",
+                        quantity: breadballQuantity,
+                      },
+                    ],
+                  });
+                }}
+              >
                 Add to order
               </button>
             </div>
@@ -205,6 +237,8 @@ const CreateCheeseBread: React.FC<CreateSideProps> = (
   props: CreateSideProps
 ) => {
   const [cheeseBreadQuantity, setCheeseBreadQuantity] = useState<number>(1);
+
+  const { orderState, orderDispatch } = useOrderContext();
 
   return (
     <div className="my-2">
@@ -243,7 +277,23 @@ const CreateCheeseBread: React.FC<CreateSideProps> = (
                   2
                 )}
               </div>
-              <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
+              <button
+                className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                onClick={() => {
+                  orderDispatch({
+                    type: "ADD",
+                    payload: [
+                      {
+                        id: crypto.randomUUID(),
+                        foodType: "SIDES",
+                        size: null,
+                        sideOption: "Breadsticks",
+                        quantity: cheeseBreadQuantity,
+                      },
+                    ],
+                  });
+                }}
+              >
                 Add to order
               </button>
             </div>

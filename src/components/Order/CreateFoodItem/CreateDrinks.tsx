@@ -15,6 +15,8 @@ const CreateDrinks: React.FC = () => {
   const [drinksOption, setDrinksOption] = useState<DrinksOptionsType>("Cola");
   const [drinksQuantity, setDrinksQuantity] = useState<number>(1);
 
+  const { orderState, orderDispatch } = useOrderContext();
+
   const sizeList = drinksSizeList.map((size, index) => {
     return (
       <div key={index} className="m-1 flex gap-2">
@@ -105,7 +107,23 @@ const CreateDrinks: React.FC = () => {
           <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
             ${drinksPrice(drinksQuantity, drinksSize)}
           </div>
-          <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
+          <button
+            className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+            onClick={() => {
+              orderDispatch({
+                type: "ADD",
+                payload: [
+                  {
+                    id: crypto.randomUUID(),
+                    foodType: "DRINKS",
+                    drinkOption: drinksOption,
+                    size: drinksSize,
+                    quantity: drinksQuantity,
+                  },
+                ],
+              });
+            }}
+          >
             Add to order
           </button>
         </div>
