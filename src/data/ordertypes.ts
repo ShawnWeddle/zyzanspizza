@@ -71,7 +71,9 @@ export type SaucesType = {
   quantity: number;
 }
 
-export type FoodType = PizzaType | WingsType | SidesType | DessertsType | DrinksType | SaucesType;
+export type FoodTypes = "PIZZA" | "WINGS" | "SIDES" | "DESSERTS" | "DRINKS" | "SAUCES";
+
+export type AnyFoodType = PizzaType | WingsType | SidesType | DessertsType | DrinksType | SaucesType;
 
 export type FullOrderType = {
   Pizzas: PizzaType[];
@@ -82,3 +84,4 @@ export type FullOrderType = {
   Sauces: SaucesType[];
   CustomerName: string;
 }
+

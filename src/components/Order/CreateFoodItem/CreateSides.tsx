@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { z } from "zod";
 import { useOrderContext } from "~/hooks/useOrderContext";
+import { useOrderHandler } from "~/data/orderHandler";
 import { breadsticksSizeList, breadBallsSizeList } from "~/data/names";
 import { breadBallsPrice, breadsticksPrice } from "~/data/pizzaPrice";
 import type { sidesOptionsList } from "~/data/names";
+import type { SidesType } from "~/data/ordertypes";
 
 type SidesList = (typeof sidesOptionsList)[number];
 type StickSizeList = (typeof breadsticksSizeList)[number];
@@ -23,6 +25,8 @@ const CreateBreadsticks: React.FC<CreateSideProps> = (
     useState<StickSizeList>("4-piece");
 
   const [breadstickQuantity, setBreadstickQuantity] = useState<number>(1);
+
+  const { orderState, orderDispatch } = useOrderContext();
 
   const sizeList = breadsticksSizeList.map((size, index) => {
     return (

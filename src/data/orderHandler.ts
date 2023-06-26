@@ -12,10 +12,6 @@ export const useOrderHandler: (food: FoodType, action: "ADD" | "REMOVE") => Full
   let newDrinks = [...order.Drinks];
   let newSauces = [...order.Sauces];
 
-  const removeItem = () => {
-    console.log("Finish later");
-  }
-
   if(action === "ADD"){
     switch(food.foodType){
       case "PIZZA": {

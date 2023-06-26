@@ -144,6 +144,20 @@ export const sauceOptionsList = [
   "Icing",
 ] as const;
 
+export const sauceBreakdown: {[key: string] : number} = {
+  Garlic: 0,
+  "Spicy Garlic": 0,
+  Ranch: 0,
+  "Spicy Ranch": 0,
+  "Pizza Sauce": 0,
+  BBQ: 0,
+  Buffalo: 0,
+  "Garlic Parmesan": 0,
+  "Nacho Cheese": 0,
+  "Blue Cheese": 0,
+  Icing: 0,
+};
+
 export const sizeToInches = {
   "Small": 10,
   "Medium": 12,

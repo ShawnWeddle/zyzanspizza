@@ -1,12 +1,22 @@
 import { useState } from "react";
-import { sauceOptionsList } from "~/data/names";
+import { sauceOptionsList, sauceBreakdown } from "~/data/names";
 import CreateSauces from "../CreateFoodItem/CreateSauces";
 
 type SauceOptionType = (typeof sauceOptionsList)[number];
+type SauceBreakdownType = typeof sauceBreakdown;
 
 const OrderSauces: React.FC = () => {
-  const Sauces = sauceOptionsList.map((pizza, index) => {
-    return <CreateSauces name={pizza} key={index} />;
+  const [sauceTotals, setSauceTotals] =
+    useState<SauceBreakdownType>(sauceBreakdown);
+
+  const setSauces = (option: SauceOptionType, quantity: number) => {
+    const newSauceTotals = { ...sauceTotals };
+    newSauceTotals[option] = quantity;
+    setSauceTotals(newSauceTotals);
+  };
+
+  const Sauces = sauceOptionsList.map((sauce, index) => {
+    return <CreateSauces name={sauce} key={index} />;
   });
 
   return (
@@ -17,6 +27,11 @@ const OrderSauces: React.FC = () => {
         </div>
         <div className="border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-0">
           {Sauces}
+          <div className="flex justify-center">
+            <button className="m-2 rounded-full bg-red-500 p-1 px-2 text-lg text-white hover:bg-red-400">
+              Add to order
+            </button>
+          </div>
         </div>
       </div>
     </div>

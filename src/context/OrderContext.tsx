@@ -1,5 +1,5 @@
 import { createContext, useReducer } from "react";
-import type { FullOrderType } from "~/data/ordertypes";
+import type { FullOrderType, FoodTypes, AnyFoodType } from "~/data/ordertypes";
 
 export const OrderContext = createContext<ContextType | null>(null);
 
@@ -12,22 +12,38 @@ type OrderContextProviderProps = {
   children: React.ReactNode;
 };
 
-type OrderReducerState = FullOrderType;
+type Action = "ADD" | "REMOVE";
+
+type ActionFood = `${Action}-${FoodTypes}`;
 
 type OrderReducerAction = {
-  type: "CHANGE";
-  payload: OrderReducerState;
+  type: ActionFood;
+  payload: AnyFoodType;
 };
 
 export const orderReducer = (
-  state: OrderReducerState,
+  state: FullOrderType,
   action: OrderReducerAction
 ) => {
   switch (action.type) {
-    case "CHANGE": {
-      return action.payload;
+    case "ADD-PIZZA": {
+      if (action.payload.foodType === "PIZZA") {
+        const newPizza = action.payload;
+        return { ...state, Pizzas: [...state.Pizzas, newPizza] };
+      } else {
+        return state;
+      }
+    }
+    case "ADD-WINGS": {
+      if (action.payload.foodType === "WINGS") {
+        const newWings = action.payload;
+        return { ...state, Wings: [...state.Wings, newWings] };
+      } else {
+        return state;
+      }
     }
   }
+  return state;
 };
 
 export const OrderContextProvider = ({

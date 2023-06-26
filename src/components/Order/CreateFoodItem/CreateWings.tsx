@@ -17,6 +17,8 @@ const CreateWings: React.FC = () => {
   const [wingsBone, setWingsBone] = useState<"Bone-in" | "Boneless">("Bone-in");
   const [wingsQuantity, setWingsQuantity] = useState<number>(1);
 
+  const { orderState, orderDispatch } = useOrderContext();
+
   const sizeList = wingsSizeList.map((size, index) => {
     return (
       <div key={index} className="m-1 flex gap-2">
@@ -146,7 +148,22 @@ const CreateWings: React.FC = () => {
             <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
               ${wingsPrice(wingsQuantity, wingsSize, wingsBone)}
             </div>
-            <button className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400">
+            <button
+              className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+              onClick={() => {
+                orderDispatch({
+                  type: "ADD-WINGS",
+                  payload: {
+                    id: "",
+                    foodType: "WINGS",
+                    quantity: wingsQuantity,
+                    size: wingsSize,
+                    bone: wingsBone === "Bone-in",
+                    sauce: wingsSauce,
+                  },
+                });
+              }}
+            >
               Add to order
             </button>
           </div>
