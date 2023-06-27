@@ -198,7 +198,9 @@ export const specialtyPizzaDescriptionsSearch= {
   "Zesty Zyzan": "Our founder's favorite. Pepperoni, Salami, Spicy Sausage, and Banana Pepper.",
   "Chicken Bacon Ranch": "Ranch dressing base with Chicken, Bacon, and Diced Tomato.",
   Veggie: "The least unhealthy option. Black Olives, Mushroom, Green Pepper, Diced Tomato, and Spinach",
- } as const;
+} as const;
+
+export type SpecialtyToppingsType = typeof pizzaToppingsList[number] | "Double Pepperoni" | "Extra Cheese"; 
 
 export const specialtyPizzaToppings = [
   {name: "Deluxe", toppings: ["Pepperoni", "Italian Sausage", "Mushroom", "Onion", "Green Pepper"]},
@@ -212,9 +214,7 @@ export const specialtyPizzaToppings = [
   {name: "Veggie", toppings: ["Mushroom", "Green Pepper", "Black Olives", "Diced Tomato", "Spinach"]},
 ]
 
-export type SpecialtyToppingsType = typeof pizzaToppingsList[number] | "Double Pepperoni" | "Extra Cheese"; 
-
-export const specialtyPizzaToppingsList= {
+export const specialtyPizzaToppingsList = {
   Deluxe: ["Pepperoni", "Italian Sausage", "Mushroom", "Onion", "Green Pepper"],
   "Many Meat": ["Pepperoni", "Italian Sausage", "Beef", "Ham", "Bacon"],
   Hawaiian: ["Ham", "Chicken", "Bacon", "Pineapple"],

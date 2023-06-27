@@ -16,24 +16,23 @@ type BreadsticksSizeType = typeof breadsticksSizeList[number];
 type BreadBallsSizeType = typeof breadBallsSizeList[number];
 type DrinksSizeType = typeof drinksSizeList[number];
 
-export const pizzaPrice = (quantity: number, size: PizzaSizeType, toppings: ToppingsType[]) => {
+export const pizzaPrice = (quantity: number, size: PizzaSizeType, toppingsNumber: number) => {
   let price = 0;
-  const toppingsTotal = toppings.length;
   switch(size){
     case "Extra Large": {
-      price = 9.99 + (toppingsTotal * 2.25);
+      price = 9.99 + (toppingsNumber * 2.25);
       break;
     }
     case "Large": {
-      price = 8.99 + (toppingsTotal * 2.00);
+      price = 8.99 + (toppingsNumber * 2.00);
       break
     }
     case "Medium": {
-      price = 7.99 + (toppingsTotal * 1.75);
+      price = 7.99 + (toppingsNumber * 1.75);
       break;
     }
     case "Small": {
-      price = 6.99 + (toppingsTotal * 1.50);
+      price = 6.99 + (toppingsNumber * 1.50);
       break;
     }
   }

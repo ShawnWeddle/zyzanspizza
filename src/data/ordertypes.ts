@@ -1,7 +1,8 @@
 import type { 
   pizzaSizeList, pizzaCrustList, pizzaSauceList, pizzaToppingsList, pizzaCrustFlavorList, specialBakeList, specialCutList, 
-  wingsSizeList, wingsSauceList, sidesOptionsList, dessertsOptionsList, drinksOptionsList, drinksSizeList, sauceOptionsList, breadsticksSizeList, breadBallsSizeList,
+  wingsSizeList, wingsSauceList, sidesOptionsList, dessertsOptionsList, drinksOptionsList, drinksSizeList, sauceOptionsList, breadsticksSizeList, breadBallsSizeList, SpecialtyToppingsType,
 } from "./names";
+
 
 type PizzaSizeList = typeof pizzaSizeList[number];
 type PizzaCrustList = typeof pizzaCrustList[number];
@@ -26,7 +27,7 @@ export type PizzaType = {
   size: PizzaSizeList;
   crust: PizzaCrustList;
   sauce: PizzaSauceList;
-  toppings: PizzaToppingsList[];
+  toppings: PizzaToppingsList[] | SpecialtyToppingsType[];
   crustFlavor: PizzaCrustFlavorList;
   quantity: number;
   specialBakeInstructions: SpecialBakeList;
