@@ -3,6 +3,7 @@ import {
   CreateBreadsticks,
   CreateBreadballs,
   CreateCheeseBread,
+  SidesInCart,
 } from "../CreateFoodItem/CreateSides";
 import type { sidesOptionsList } from "~/data/names";
 
@@ -21,6 +22,7 @@ const OrderSides: React.FC = () => {
         activeSide={activeSide}
         setActiveSide={setActiveSide}
       />
+      <SidesInCart />
     </div>
   );
 };

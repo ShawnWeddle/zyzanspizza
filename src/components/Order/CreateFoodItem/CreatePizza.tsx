@@ -41,6 +41,36 @@ const CreatePizzaOrder: React.FC = () => {
     useState<(typeof specialCutList)[number]>("Triangle Cut");
   const [pizzaQuantity, setPizzaQuantity] = useState<number>(1);
 
+  const cartPizzas = orderState.Pizzas.map((pizza, index) => {
+    if (pizza.isSpecialtyPizza) {
+      return (
+        <p key={index} className="m-2 text-lg text-zinc-50">
+          • <span className="font-semibold">{pizza.quantity}</span>
+          {" - "}
+          {sizeToInches[pizza.size]}&quot; {pizza.crust}{" "}
+          {pizza.specialtyPizzaName} {pizza.quantity > 1 ? "pizzas" : "pizza"}
+          {pizza.crustFlavor !== "None"
+            ? ` with ${pizza.crustFlavor} crust`
+            : ""}
+        </p>
+      );
+    } else {
+      return (
+        <p key={index} className="m-2 text-lg text-zinc-50">
+          • <span className="font-semibold">{pizza.quantity}</span>
+          {" - "}
+          {sizeToInches[pizza.size]}&quot; {pizza.crust}{" "}
+          {pizza.quantity > 1 ? "pizzas" : "pizza"} with {pizza.sauce}
+          {pizza.toppings.length > 0 ? ", " : ""}
+          {pizza.toppings.join(", ")}
+          {pizza.crustFlavor !== "None"
+            ? `, and ${pizza.crustFlavor} crust`
+            : ""}
+        </p>
+      );
+    }
+  });
+
   const sizeList = pizzaSizeList.map((size, index) => {
     return (
       <div key={index} className="m-1 flex gap-2">
@@ -173,84 +203,101 @@ const CreatePizzaOrder: React.FC = () => {
   });
 
   return (
-    <div className="mt-4">
-      <div className="mb-4 bg-gradient-to-br from-green-700 to-green-800 sm:max-w-screen-sm sm:rounded-xl">
-        <div className="p-2">
-          <p className="text-lg text-zinc-50">
-            {pizzaQuantity > 1 ? `${pizzaQuantity} ` : ""}
-            {sizeToInches[pizzaSize]}&quot; {pizzaCrust}{" "}
-            {pizzaQuantity > 1 ? "pizzas" : "pizza"} with {pizzaSauce}
-            {pizzaToppings.length > 0 ? ", " : ""}
-            {pizzaToppings.join(", ")}
-            {pizzaCrustFlavor !== "None"
-              ? `, and ${pizzaCrustFlavor} crust`
-              : ""}
-          </p>
-          {specialBake !== "Normal" && (
-            <p className="text-lg font-semibold text-zinc-50">
-              **{specialBake}**
+    <div className="mt-4 ">
+      <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
+        <div className="mb-4 flex w-full flex-col justify-between bg-gradient-to-br from-green-700 to-green-800 sm:rounded-xl">
+          <div className="p-2">
+            <p className="text-lg text-zinc-50">
+              {pizzaQuantity > 1 ? `${pizzaQuantity} ` : ""}
+              {sizeToInches[pizzaSize]}&quot; {pizzaCrust}{" "}
+              {pizzaQuantity > 1 ? "pizzas" : "pizza"} with {pizzaSauce}
+              {pizzaToppings.length > 0 ? ", " : ""}
+              {pizzaToppings.join(", ")}
+              {pizzaCrustFlavor !== "None"
+                ? `, and ${pizzaCrustFlavor} crust`
+                : ""}
             </p>
-          )}
-          {((specialCut !== "Triangle Cut" && pizzaCrust === "Original") ||
-            (specialCut !== "Square Cut" && pizzaCrust === "Thin")) && (
-            <p className="text-lg font-semibold text-zinc-50">
-              **{specialCut}**
-            </p>
-          )}
-        </div>
-        <div className="flex justify-start">
-          <div className="m-2 flex justify-center">
-            <button
-              onClick={() => {
-                setPizzaQuantity(pizzaQuantity - 1);
-              }}
-              disabled={pizzaQuantity <= 1}
-              className="h-10 w-10 rounded-l-full border font-mono text-2xl font-bold text-zinc-50 disabled:bg-green-200"
-            >
-              -
-            </button>
-            <div className="h-10 w-10 border-y bg-zinc-50 pt-1 text-center text-lg font-semibold dark:text-black">
-              {pizzaQuantity}
-            </div>
-            <button
-              onClick={() => {
-                setPizzaQuantity(pizzaQuantity + 1);
-              }}
-              className="h-10 w-10 rounded-r-full border font-mono text-2xl font-bold text-zinc-50"
-            >
-              +
-            </button>
+            {specialBake !== "Normal" && (
+              <p className="text-lg font-semibold text-zinc-50">
+                **{specialBake}**
+              </p>
+            )}
+            {((specialCut !== "Triangle Cut" && pizzaCrust === "Original") ||
+              (specialCut !== "Square Cut" && pizzaCrust === "Thin")) && (
+              <p className="text-lg font-semibold text-zinc-50">
+                **{specialCut}**
+              </p>
+            )}
           </div>
-          <div className="m-2 flex justify-center">
-            <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-              ${pizzaPrice(pizzaQuantity, pizzaSize, pizzaToppings)}
+          <div className="flex justify-start">
+            <div className="m-2 flex justify-center">
+              <button
+                onClick={() => {
+                  setPizzaQuantity(pizzaQuantity - 1);
+                }}
+                disabled={pizzaQuantity <= 1}
+                className="h-10 w-10 rounded-l-full border font-mono text-2xl font-bold text-zinc-50 disabled:bg-green-200"
+              >
+                -
+              </button>
+              <div className="h-10 w-10 border-y bg-zinc-50 pt-1 text-center text-lg font-semibold dark:text-black">
+                {pizzaQuantity}
+              </div>
+              <button
+                onClick={() => {
+                  setPizzaQuantity(pizzaQuantity + 1);
+                }}
+                className="h-10 w-10 rounded-r-full border font-mono text-2xl font-bold text-zinc-50"
+              >
+                +
+              </button>
             </div>
-            <button
-              className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white"
-              onClick={() => {
-                orderDispatch({
-                  type: "ADD",
-                  payload: [
-                    {
-                      id: crypto.randomUUID(),
-                      foodType: "PIZZA",
-                      size: pizzaSize,
-                      crust: pizzaCrust,
-                      sauce: pizzaSauce,
-                      toppings: pizzaToppings,
-                      crustFlavor: pizzaCrustFlavor,
-                      quantity: pizzaQuantity,
-                      specialBakeInstructions: specialBake,
-                      specialCutInstructions: specialCut,
-                      isSpecialtyPizza: false,
+            <div className="m-2 flex justify-center">
+              <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
+                ${pizzaPrice(pizzaQuantity, pizzaSize, pizzaToppings.length)}
+              </div>
+              <button
+                className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white"
+                onClick={() => {
+                  orderDispatch({
+                    type: "ADD",
+                    payload: {
+                      order: [
+                        {
+                          id: crypto.randomUUID(),
+                          foodType: "PIZZA",
+                          size: pizzaSize,
+                          crust: pizzaCrust,
+                          sauce: pizzaSauce,
+                          toppings: pizzaToppings,
+                          crustFlavor: pizzaCrustFlavor,
+                          quantity: pizzaQuantity,
+                          specialBakeInstructions: specialBake,
+                          specialCutInstructions: specialCut,
+                          isSpecialtyPizza: false,
+                        },
+                      ],
+                      customerName: orderState.customerName,
                     },
-                  ],
-                });
-              }}
-            >
-              Add to order
-            </button>
+                  });
+                }}
+              >
+                Add to order
+              </button>
+            </div>
           </div>
+        </div>
+        <div className="mb-4 w-full bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
+          {cartPizzas.length > 0 ? (
+            <>
+              <p className="m-2 text-lg text-zinc-50">Pizzas in cart:</p>
+              {cartPizzas}
+            </>
+          ) : (
+            <p className="m-2 text-lg font-semibold text-red-200">
+              NO PIZZAS IN CART
+            </p>
+          )}
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-3">

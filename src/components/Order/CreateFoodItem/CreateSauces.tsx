@@ -1,10 +1,9 @@
 import { useState } from "react";
 import { useOrderContext } from "~/hooks/useOrderContext";
-import { sauceOptionsList, sauceBreakdown } from "~/data/names";
+import { sauceOptionsList } from "~/data/names";
 import type { SaucesType } from "~/data/ordertypes";
 import { SauceNamer } from "~/data/sauceNameAlg";
 
-type SauceOptionType = (typeof sauceOptionsList)[number];
 type SauceBreakdownType = {
   Garlic: number;
   "Spicy Garlic": number;
@@ -38,6 +37,32 @@ const OrderSauces: React.FC = () => {
     useState<SauceBreakdownType>(emptySauces);
 
   const { orderState, orderDispatch } = useOrderContext();
+
+  const cartSauces = orderState.Sauces.map((sauces, index) => {
+    return (
+      <div key={index} className="flex justify-between">
+        <p key={index} className="m-2 text-lg text-zinc-50">
+          • <span className="font-semibold">{sauces.quantity}</span>
+          {" - "}
+          {sauces.sauceOption}
+        </p>
+        <button
+          className="mx-2 text-white"
+          onClick={() => {
+            orderDispatch({
+              type: "REMOVE",
+              payload: {
+                order: [sauces],
+                customerName: orderState.customerName,
+              },
+            });
+          }}
+        >
+          ✕
+        </button>
+      </div>
+    );
+  });
 
   const Sauces = sauceOptionsList.map((sauce, index) => {
     return (
@@ -90,7 +115,7 @@ const OrderSauces: React.FC = () => {
                 (saucePair) => saucePair[1] > 0
               );
               const newSauces: SaucesType[] = [...fullSauces].map(
-                (saucePair, index) => {
+                (saucePair) => {
                   return {
                     id: crypto.randomUUID(),
                     foodType: "SAUCES",
@@ -99,12 +124,30 @@ const OrderSauces: React.FC = () => {
                   };
                 }
               );
-              orderDispatch({ type: "ADD", payload: newSauces });
+              orderDispatch({
+                type: "ADD",
+                payload: {
+                  order: newSauces,
+                  customerName: orderState.customerName,
+                },
+              });
               setSauceQuantity(emptySauces);
             }}
           >
             Add to order
           </button>
+        </div>
+        <div className="col-span-2 mb-4 w-full bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
+          {cartSauces.length > 0 ? (
+            <>
+              <p className="m-2 text-lg text-zinc-50">Sauces in cart:</p>
+              {cartSauces}
+            </>
+          ) : (
+            <p className="m-2 text-lg font-semibold text-red-200">
+              NO SAUCES IN CART
+            </p>
+          )}
         </div>
       </div>
     </div>

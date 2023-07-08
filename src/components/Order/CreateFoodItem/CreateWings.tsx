@@ -19,6 +19,32 @@ const CreateWings: React.FC = () => {
 
   const { orderState, orderDispatch } = useOrderContext();
 
+  const cartWings = orderState.Wings.map((wings, index) => {
+    return (
+      <div key={index} className="flex justify-between">
+        <p className="m-2 text-lg text-zinc-50">
+          • <span className="font-semibold">{wings.quantity}</span>
+          {" - "}
+          {wings.size} {wings.sauce} {wings.bone} Wings
+        </p>
+        <button
+          className="mx-2 text-white"
+          onClick={() => {
+            orderDispatch({
+              type: "REMOVE",
+              payload: {
+                order: [wings],
+                customerName: orderState.customerName,
+              },
+            });
+          }}
+        >
+          ✕
+        </button>
+      </div>
+    );
+  });
+
   const sizeList = wingsSizeList.map((size, index) => {
     return (
       <div key={index} className="m-1 flex gap-2">
@@ -153,21 +179,36 @@ const CreateWings: React.FC = () => {
               onClick={() => {
                 orderDispatch({
                   type: "ADD",
-                  payload: [
-                    {
-                      id: crypto.randomUUID(),
-                      foodType: "WINGS",
-                      quantity: wingsQuantity,
-                      size: wingsSize,
-                      bone: wingsBone === "Bone-in",
-                      sauce: wingsSauce,
-                    },
-                  ],
+                  payload: {
+                    order: [
+                      {
+                        id: crypto.randomUUID(),
+                        foodType: "WINGS",
+                        quantity: wingsQuantity,
+                        size: wingsSize,
+                        bone: wingsBone === "Bone-in",
+                        sauce: wingsSauce,
+                      },
+                    ],
+                    customerName: orderState.customerName,
+                  },
                 });
               }}
             >
               Add to order
             </button>
+          </div>
+          <div className="col-span-2 mb-4 w-full bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
+            {cartWings.length > 0 ? (
+              <>
+                <p className="m-2 text-lg text-zinc-50">Wings in cart:</p>
+                {cartWings}
+              </>
+            ) : (
+              <p className="m-2 text-lg font-semibold text-red-200">
+                NO WINGS IN CART
+              </p>
+            )}
           </div>
         </div>
       </div>

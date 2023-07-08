@@ -3,6 +3,7 @@ import {
   CreateBigBrownie,
   CreateBigCookie,
   CreateCinnamonRolls,
+  DessertsInCart,
 } from "../CreateFoodItem/CreateDesserts";
 import type { dessertsOptionsList } from "~/data/names";
 
@@ -24,6 +25,7 @@ const OrderDesserts: React.FC = () => {
         activeDessert={activeDessert}
         setActiveDessert={setActiveDessert}
       />
+      <DessertsInCart />
     </div>
   );
 };

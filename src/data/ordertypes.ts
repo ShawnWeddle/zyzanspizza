@@ -1,6 +1,6 @@
 import type { 
   pizzaSizeList, pizzaCrustList, pizzaSauceList, pizzaToppingsList, pizzaCrustFlavorList, specialBakeList, specialCutList, 
-  wingsSizeList, wingsSauceList, sidesOptionsList, dessertsOptionsList, drinksOptionsList, drinksSizeList, sauceOptionsList, breadsticksSizeList, breadBallsSizeList, SpecialtyToppingsType,
+  wingsSizeList, wingsSauceList, sidesOptionsList, dessertsOptionsList, drinksOptionsList, drinksSizeList, sauceOptionsList, breadsticksSizeList, breadBallsSizeList, SpecialtyToppingsType, specialtyPizzaNameList
 } from "./names";
 
 
@@ -21,6 +21,8 @@ type DrinksOptionsList = typeof drinksOptionsList[number];
 type DrinksSizeList = typeof drinksSizeList[number];
 type SauceOptionsList = typeof sauceOptionsList[number];
 
+type SpecialtyPizzaNameType = typeof specialtyPizzaNameList[number];
+
 export type PizzaType = {
   id: string;
   foodType: "PIZZA";
@@ -33,6 +35,7 @@ export type PizzaType = {
   specialBakeInstructions: SpecialBakeList;
   specialCutInstructions: SpecialCutList;
   isSpecialtyPizza: boolean;
+  specialtyPizzaName?: SpecialtyPizzaNameType;
 }
 
 export type WingsType = {
@@ -85,6 +88,6 @@ export type FullOrderType = {
   Desserts: DessertsType[];
   Drinks: DrinksType[];
   Sauces: SaucesType[];
-  CustomerName: string | null;
+  customerName: string | null;
 }
 

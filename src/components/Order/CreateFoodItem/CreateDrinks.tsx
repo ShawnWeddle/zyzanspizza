@@ -17,6 +17,32 @@ const CreateDrinks: React.FC = () => {
 
   const { orderState, orderDispatch } = useOrderContext();
 
+  const cartDrinks = orderState.Drinks.map((drinks, index) => {
+    return (
+      <div key={index} className="flex justify-between">
+        <p key={index} className="m-2 text-lg text-zinc-50">
+          • <span className="font-semibold">{drinks.quantity}</span>
+          {" - "}
+          {drinks.size} {drinks.drinkOption}
+        </p>
+        <button
+          className="mx-2 text-white"
+          onClick={() => {
+            orderDispatch({
+              type: "REMOVE",
+              payload: {
+                order: [drinks],
+                customerName: orderState.customerName,
+              },
+            });
+          }}
+        >
+          ✕
+        </button>
+      </div>
+    );
+  });
+
   const sizeList = drinksSizeList.map((size, index) => {
     return (
       <div key={index} className="m-1 flex gap-2">
@@ -112,20 +138,35 @@ const CreateDrinks: React.FC = () => {
             onClick={() => {
               orderDispatch({
                 type: "ADD",
-                payload: [
-                  {
-                    id: crypto.randomUUID(),
-                    foodType: "DRINKS",
-                    drinkOption: drinksOption,
-                    size: drinksSize,
-                    quantity: drinksQuantity,
-                  },
-                ],
+                payload: {
+                  order: [
+                    {
+                      id: crypto.randomUUID(),
+                      foodType: "DRINKS",
+                      drinkOption: drinksOption,
+                      size: drinksSize,
+                      quantity: drinksQuantity,
+                    },
+                  ],
+                  customerName: orderState.customerName,
+                },
               });
             }}
           >
             Add to order
           </button>
+        </div>
+        <div className="col-span-2 mb-4 w-full bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
+          {cartDrinks.length > 0 ? (
+            <>
+              <p className="m-2 text-lg text-zinc-50">Drinks in cart:</p>
+              {cartDrinks}
+            </>
+          ) : (
+            <p className="m-2 text-lg font-semibold text-red-200">
+              NO DRINKS IN CART
+            </p>
+          )}
         </div>
       </div>
     </div>
