@@ -36,6 +36,7 @@ export type PizzaType = {
   specialCutInstructions: SpecialCutList;
   isSpecialtyPizza: boolean;
   specialtyPizzaName?: SpecialtyPizzaNameType;
+  price: number;
 }
 
 export type WingsType = {
@@ -45,6 +46,7 @@ export type WingsType = {
   bone: boolean;
   sauce: WingsSauceList;
   quantity: number;
+  price: number;
 }
 
 export type SidesType = {
@@ -53,6 +55,7 @@ export type SidesType = {
   sideOption: SidesOptionsList;
   size: SidesSizeList;
   quantity: number;
+  price: number;
 }
 
 export type DessertsType = {
@@ -60,6 +63,7 @@ export type DessertsType = {
   foodType: "DESSERTS";
   dessertOption: DessertsOptionsList;
   quantity: number;
+  price: number;
 }
 
 export type DrinksType = {
@@ -68,6 +72,7 @@ export type DrinksType = {
   drinkOption: DrinksOptionsList;
   size: DrinksSizeList;
   quantity: number;
+  price: number;
 }
 
 export type SaucesType = {
@@ -75,6 +80,7 @@ export type SaucesType = {
   foodType: "SAUCES";
   sauceOption: SauceOptionsList;
   quantity: number;
+  price: number;
 }
 
 export type FoodTypes = "PIZZA" | "WINGS" | "SIDES" | "DESSERTS" | "DRINKS" | "SAUCES";

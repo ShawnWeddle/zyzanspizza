@@ -1,9 +1,9 @@
 import { type NextPage } from "next";
 import Head from "next/head";
 import NavBar from "~/components/Nav";
-import SignInForm from "~/components/SignIn/SignIn";
+import CheckoutList from "~/components/Checkout";
 
-const SignIn: NextPage = () => {
+const Checkout: NextPage = () => {
   return (
     <>
       <Head>
@@ -14,10 +14,10 @@ const SignIn: NextPage = () => {
       <main className="dark flex min-h-screen flex-col items-center bg-gradient-to-r from-zinc-50 via-amber-50 to-zinc-50 dark:bg-gradient-to-br dark:from-zinc-700 dark:to-zinc-800 dark:text-zinc-50">
         <NavBar />
         <div className="h-16"></div>
-        <SignInForm />
+        <CheckoutList />
       </main>
     </>
   );
 };
 
-export default SignIn;
+export default Checkout;

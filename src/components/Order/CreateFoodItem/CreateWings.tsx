@@ -2,7 +2,8 @@ import { useState } from "react";
 import { z } from "zod";
 import { useOrderContext } from "~/hooks/useOrderContext";
 import { wingsSauceList, wingsSizeList } from "~/data/names";
-import { wingsPrice } from "~/data/pizzaPrice";
+import { wingsPrice } from "~/data/priceCalculator";
+import { WingsInCartSpan } from "~/components/CartItems/CartItems";
 
 const sizeEnum = z.enum(wingsSizeList);
 const boneEnum = z.enum(["Bone-in", "Boneless"]);
@@ -21,14 +22,10 @@ const CreateWings: React.FC = () => {
 
   const cartWings = orderState.Wings.map((wings, index) => {
     return (
-      <div key={index} className="flex justify-between">
-        <p className="m-2 text-lg text-zinc-50">
-          • <span className="font-semibold">{wings.quantity}</span>
-          {" - "}
-          {wings.size} {wings.sauce} {wings.bone} Wings
-        </p>
+      <div key={index} className="flex justify-between  text-white">
+        <WingsInCartSpan wings={wings} index={index} />
         <button
-          className="mx-2 text-white"
+          className="mx-2"
           onClick={() => {
             orderDispatch({
               type: "REMOVE",
@@ -172,7 +169,7 @@ const CreateWings: React.FC = () => {
           </div>
           <div className="col-span-2 m-2 flex justify-center">
             <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-              ${wingsPrice(wingsQuantity, wingsSize, wingsBone)}
+              ${wingsPrice(wingsQuantity, wingsSize, wingsBone).text}
             </div>
             <button
               className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
@@ -188,6 +185,8 @@ const CreateWings: React.FC = () => {
                         size: wingsSize,
                         bone: wingsBone === "Bone-in",
                         sauce: wingsSauce,
+                        price: wingsPrice(wingsQuantity, wingsSize, wingsBone)
+                          .number,
                       },
                     ],
                     customerName: orderState.customerName,
@@ -198,7 +197,7 @@ const CreateWings: React.FC = () => {
               Add to order
             </button>
           </div>
-          <div className="col-span-2 mb-4 w-full bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
+          <div className="col-span-2 m-2 bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
             {cartWings.length > 0 ? (
               <>
                 <p className="m-2 text-lg text-zinc-50">Wings in cart:</p>

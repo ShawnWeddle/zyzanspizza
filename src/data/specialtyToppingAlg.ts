@@ -1,5 +1,4 @@
-import { specialtyPizzaNameList } from "./names"
-import type { SpecialtyToppingsType } from "./names"
+import type { specialtyPizzaNameList, SpecialtyToppingsType } from "./names"
 
 type PizzaNameType = typeof specialtyPizzaNameList[number];
 

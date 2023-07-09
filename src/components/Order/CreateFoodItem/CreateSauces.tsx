@@ -2,7 +2,9 @@ import { useState } from "react";
 import { useOrderContext } from "~/hooks/useOrderContext";
 import { sauceOptionsList } from "~/data/names";
 import type { SaucesType } from "~/data/ordertypes";
+import { saucesPrice } from "~/data/priceCalculator";
 import { SauceNamer } from "~/data/sauceNameAlg";
+import { SaucesInCartSpan } from "~/components/CartItems/CartItems";
 
 type SauceBreakdownType = {
   Garlic: number;
@@ -40,14 +42,10 @@ const OrderSauces: React.FC = () => {
 
   const cartSauces = orderState.Sauces.map((sauces, index) => {
     return (
-      <div key={index} className="flex justify-between">
-        <p key={index} className="m-2 text-lg text-zinc-50">
-          • <span className="font-semibold">{sauces.quantity}</span>
-          {" - "}
-          {sauces.sauceOption}
-        </p>
+      <div key={index} className="flex justify-between text-white">
+        <SaucesInCartSpan sauces={sauces} index={index} />
         <button
-          className="mx-2 text-white"
+          className="mx-2"
           onClick={() => {
             orderDispatch({
               type: "REMOVE",
@@ -121,6 +119,7 @@ const OrderSauces: React.FC = () => {
                     foodType: "SAUCES",
                     sauceOption: SauceNamer(saucePair[0]),
                     quantity: saucePair[1],
+                    price: saucesPrice(saucePair[1]).number,
                   };
                 }
               );
@@ -137,7 +136,7 @@ const OrderSauces: React.FC = () => {
             Add to order
           </button>
         </div>
-        <div className="col-span-2 mb-4 w-full bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
+        <div className="col-span-2 m-2 bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
           {cartSauces.length > 0 ? (
             <>
               <p className="m-2 text-lg text-zinc-50">Sauces in cart:</p>

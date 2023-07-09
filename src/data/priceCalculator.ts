@@ -1,6 +1,5 @@
 import type {
   pizzaSizeList,
-  pizzaToppingsList,
   wingsSizeList,
   breadBallsSizeList,
   breadsticksSizeList,
@@ -8,9 +7,9 @@ import type {
 } from "~/data/names";
 
 import { specialtySizeToPrice } from "~/data/names";
+import type { FullOrderType } from "./ordertypes";
 
 type PizzaSizeType = typeof pizzaSizeList[number];
-type ToppingsType = typeof pizzaToppingsList[number];
 type WingsSizeType = typeof wingsSizeList[number];
 type BreadsticksSizeType = typeof breadsticksSizeList[number];
 type BreadBallsSizeType = typeof breadBallsSizeList[number];
@@ -37,14 +36,16 @@ export const pizzaPrice = (quantity: number, size: PizzaSizeType, toppingsNumber
     }
   }
   const priceText = (Math.round(price * quantity * 100) / 100).toFixed(2);
-  return priceText;
+  const priceNumber = Number(priceText);
+  return {text: priceText, number: priceNumber};
 }
 
 export const specialtyPizzaPrice = (quantity: number, size: PizzaSizeType) => {
   let price = 0;
   price = specialtySizeToPrice[size];
   const priceText = (Math.round(price * quantity * 100) / 100).toFixed(2);
-  return priceText;
+  const priceNumber = Number(priceText);
+  return {text: priceText, number: priceNumber};
 }
 
 export const wingsPrice = (quantity: number, size: WingsSizeType, bone: "Bone-in" | "Boneless") => {
@@ -68,10 +69,11 @@ export const wingsPrice = (quantity: number, size: WingsSizeType, bone: "Bone-in
     }
   }
   const priceText = (Math.round(price * quantity * 100) / 100).toFixed(2);
-  return priceText;
+  const priceNumber = Number(priceText);
+  return {text: priceText, number: priceNumber};
 }
 
-export const breadsticksPrice = (quantity: number, size: BreadsticksSizeType) => {
+export const sidesPrice = (quantity: number, size: BreadsticksSizeType | BreadBallsSizeType | null) => {
   let price = 0;
   switch(size){
     case "4-piece": {
@@ -82,14 +84,6 @@ export const breadsticksPrice = (quantity: number, size: BreadsticksSizeType) =>
       price = 4.99;
       break;
     }
-  }
-  const priceText = (Math.round(price * quantity * 100) / 100).toFixed(2);
-  return priceText;
-}
-
-export const breadBallsPrice = (quantity: number, size: BreadBallsSizeType) => {
-  let price = 0;
-  switch(size){
     case "16-piece": {
       price = 3.49;
       break;
@@ -98,9 +92,21 @@ export const breadBallsPrice = (quantity: number, size: BreadBallsSizeType) => {
       price = 5.99;
       break;
     }
+    case null: {
+      price = 4.99;
+      break;
+    }
   }
   const priceText = (Math.round(price * quantity * 100) / 100).toFixed(2);
-  return priceText;
+  const priceNumber = Number(priceText);
+  return {text: priceText, number: priceNumber};
+}
+
+export const dessertsPrice = (quantity: number) => {
+  const price = 6.99;
+  const priceText = (Math.round(price * quantity * 100) / 100).toFixed(2);
+  const priceNumber = Number(priceText);
+  return {text: priceText, number: priceNumber};
 }
 
 export const drinksPrice = (quantity: number, size: DrinksSizeType) => {
@@ -116,5 +122,29 @@ export const drinksPrice = (quantity: number, size: DrinksSizeType) => {
     }
   }
   const priceText = (Math.round(price * quantity * 100) / 100).toFixed(2);
-  return priceText;
+  const priceNumber = Number(priceText);
+  return {text: priceText, number: priceNumber};
+}
+
+export const saucesPrice = (quantity: number) => {
+  const price = 0.75;
+  const priceText = (Math.round(price * quantity * 100) / 100).toFixed(2);
+  const priceNumber = Number(priceText);
+  return {text: priceText, number: priceNumber};
+}
+
+export const wholePrice = (order: FullOrderType) => {
+  const { Pizzas, Sides, Wings, Desserts, Drinks, Sauces } =
+    order;
+
+  const finalPrice =
+  Math.round(
+    100 *
+      [...Pizzas, ...Wings, ...Sides, ...Desserts, ...Drinks, ...Sauces]
+        .map((item) => item.price)
+        .reduce((total, price) => total + price)
+  ) / 100;
+  const finalPriceText = finalPrice.toFixed(2);
+
+  return {number: finalPrice, text: finalPriceText}
 }

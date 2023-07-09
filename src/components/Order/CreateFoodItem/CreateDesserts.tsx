@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { useOrderContext } from "~/hooks/useOrderContext";
 import {} from "~/data/names";
-import {} from "~/data/pizzaPrice";
+import { dessertsPrice } from "~/data/priceCalculator";
 import type { dessertsOptionsList } from "~/data/names";
+import { DessertsInCartSpan } from "~/components/CartItems/CartItems";
 
 type DessertsList = (typeof dessertsOptionsList)[number];
 type CreateDessertProps = {
@@ -56,7 +57,7 @@ const CreateBigBrownie: React.FC<CreateDessertProps> = (
               </div>
               <div className="m-2 flex justify-center">
                 <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-                  ${(Math.round(6.99 * brownieQuantity * 100) / 100).toFixed(2)}
+                  ${dessertsPrice(brownieQuantity).text}
                 </div>
                 <button
                   className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
@@ -70,6 +71,7 @@ const CreateBigBrownie: React.FC<CreateDessertProps> = (
                             foodType: "DESSERTS",
                             dessertOption: "Big Brownie",
                             quantity: brownieQuantity,
+                            price: dessertsPrice(brownieQuantity).number,
                           },
                         ],
                         customerName: orderState.customerName,
@@ -144,7 +146,7 @@ const CreateBigCookie: React.FC<CreateDessertProps> = (
               </div>
               <div className="m-2 flex justify-center">
                 <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-                  ${(Math.round(6.99 * cookieQuantity * 100) / 100).toFixed(2)}
+                  ${dessertsPrice(cookieQuantity).text}
                 </div>
                 <button
                   className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
@@ -158,6 +160,7 @@ const CreateBigCookie: React.FC<CreateDessertProps> = (
                             foodType: "DESSERTS",
                             dessertOption: "Big Cookie",
                             quantity: cookieQuantity,
+                            price: dessertsPrice(cookieQuantity).number,
                           },
                         ],
                         customerName: orderState.customerName,
@@ -232,10 +235,7 @@ const CreateCinnamonRolls: React.FC<CreateDessertProps> = (
               </div>
               <div className="m-2 flex justify-center">
                 <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-                  $
-                  {(
-                    Math.round(6.99 * cinnamonRollQuantity * 100) / 100
-                  ).toFixed(2)}
+                  ${dessertsPrice(cinnamonRollQuantity).text}
                 </div>
                 <button
                   className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
@@ -249,6 +249,7 @@ const CreateCinnamonRolls: React.FC<CreateDessertProps> = (
                             foodType: "DESSERTS",
                             dessertOption: "Pull-Apart Cinnamon Rolls",
                             quantity: cinnamonRollQuantity,
+                            price: dessertsPrice(cinnamonRollQuantity).number,
                           },
                         ],
                         customerName: orderState.customerName,
@@ -284,14 +285,10 @@ const DessertsInCart: React.FC = () => {
 
   const cartDesserts = orderState.Desserts.map((desserts, index) => {
     return (
-      <div key={index} className="flex justify-between">
-        <p key={index} className="m-2 text-lg text-zinc-50">
-          • <span className="font-semibold">{desserts.quantity}</span>
-          {" - "}
-          {desserts.dessertOption}
-        </p>
+      <div key={index} className="flex justify-between text-white">
+        <DessertsInCartSpan desserts={desserts} index={index} />
         <button
-          className="mx-2 text-white"
+          className="mx-2"
           onClick={() => {
             orderDispatch({
               type: "REMOVE",

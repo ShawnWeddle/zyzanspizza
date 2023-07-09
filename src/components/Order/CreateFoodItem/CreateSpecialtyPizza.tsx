@@ -11,9 +11,10 @@ import {
   sizeToInches,
 } from "~/data/names";
 import type { pizzaSauceList, SpecialtyToppingsType } from "~/data/names";
-import { specialtyPizzaPrice } from "~/data/pizzaPrice";
+import { specialtyPizzaPrice } from "~/data/priceCalculator";
 import specialtyToppingAlg from "~/data/specialtyToppingAlg";
 import { useOrderContext } from "~/hooks/useOrderContext";
+import { PizzaInCartSpan } from "~/components/CartItems/CartItems";
 
 const specialtyEnum = z.enum(specialtyPizzaNameList);
 const sizeEnum = z.enum(pizzaSizeList);
@@ -52,33 +53,25 @@ const CreateSpecialtyPizzaOrder: React.FC = () => {
   const [pizzaQuantity, setPizzaQuantity] = useState<number>(1);
 
   const cartPizzas = orderState.Pizzas.map((pizza, index) => {
-    if (pizza.isSpecialtyPizza) {
-      return (
-        <p key={index} className="m-2 text-lg text-zinc-50">
-          • <span className="font-semibold">{pizza.quantity}</span>
-          {" - "}
-          {sizeToInches[pizza.size]}&quot; {pizza.crust}{" "}
-          {pizza.specialtyPizzaName} {pizza.quantity > 1 ? "pizzas" : "pizza"}
-          {pizza.crustFlavor !== "None"
-            ? ` with ${pizza.crustFlavor} crust`
-            : ""}
-        </p>
-      );
-    } else {
-      return (
-        <p key={index} className="m-2 text-lg text-zinc-50">
-          • <span className="font-semibold">{pizza.quantity}</span>
-          {" - "}
-          {sizeToInches[pizza.size]}&quot; {pizza.crust}{" "}
-          {pizza.quantity > 1 ? "pizzas" : "pizza"} with {pizza.sauce}
-          {pizza.toppings.length > 0 ? ", " : ""}
-          {pizza.toppings.join(", ")}
-          {pizza.crustFlavor !== "None"
-            ? `, and ${pizza.crustFlavor} crust`
-            : ""}
-        </p>
-      );
-    }
+    return (
+      <div key={index} className="flex justify-between text-white">
+        <PizzaInCartSpan pizza={pizza} index={index} />
+        <button
+          className="mx-2"
+          onClick={() => {
+            orderDispatch({
+              type: "REMOVE",
+              payload: {
+                order: [pizza],
+                customerName: orderState.customerName,
+              },
+            });
+          }}
+        >
+          ✕
+        </button>
+      </div>
+    );
   });
 
   const specialtyList = specialtyPizzaNameList.map((pizza, index) => {
@@ -264,7 +257,7 @@ const CreateSpecialtyPizzaOrder: React.FC = () => {
             </div>
             <div className="m-2 flex justify-center">
               <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-                ${specialtyPizzaPrice(pizzaQuantity, pizzaSize)}
+                ${specialtyPizzaPrice(pizzaQuantity, pizzaSize).text}
               </div>
               <button
                 className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white"
@@ -286,6 +279,8 @@ const CreateSpecialtyPizzaOrder: React.FC = () => {
                           specialCutInstructions: specialCut,
                           isSpecialtyPizza: true,
                           specialtyPizzaName: specialtyPizza,
+                          price: specialtyPizzaPrice(pizzaQuantity, pizzaSize)
+                            .number,
                         },
                       ],
                       customerName: orderState.customerName,

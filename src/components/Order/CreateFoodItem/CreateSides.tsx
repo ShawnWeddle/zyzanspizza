@@ -2,8 +2,9 @@ import { useState } from "react";
 import { z } from "zod";
 import { useOrderContext } from "~/hooks/useOrderContext";
 import { breadsticksSizeList, breadBallsSizeList } from "~/data/names";
-import { breadBallsPrice, breadsticksPrice } from "~/data/pizzaPrice";
+import { sidesPrice } from "~/data/priceCalculator";
 import type { sidesOptionsList } from "~/data/names";
+import { SidesInCartSpan } from "~/components/CartItems/CartItems";
 
 type SidesList = (typeof sidesOptionsList)[number];
 type StickSizeList = (typeof breadsticksSizeList)[number];
@@ -80,7 +81,7 @@ const CreateBreadsticks: React.FC<CreateSideProps> = (
                 </div>
                 <div className="m-2 flex justify-end">
                   <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-                    ${breadsticksPrice(breadstickQuantity, breadsticksSize)}
+                    ${sidesPrice(breadstickQuantity, breadsticksSize).text}
                   </div>
                   <button
                     className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
@@ -95,6 +96,10 @@ const CreateBreadsticks: React.FC<CreateSideProps> = (
                               size: breadsticksSize,
                               sideOption: "Breadsticks",
                               quantity: breadstickQuantity,
+                              price: sidesPrice(
+                                breadstickQuantity,
+                                breadsticksSize
+                              ).number,
                             },
                           ],
                           customerName: orderState.customerName,
@@ -193,7 +198,7 @@ const CreateBreadballs: React.FC<CreateSideProps> = (
                 </div>
                 <div className="m-2 flex justify-end">
                   <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-                    ${breadBallsPrice(breadballQuantity, breadballsSize)}
+                    ${sidesPrice(breadballQuantity, breadballsSize).text}
                   </div>
                   <button
                     className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
@@ -208,6 +213,10 @@ const CreateBreadballs: React.FC<CreateSideProps> = (
                               size: breadballsSize,
                               sideOption: "Bread Balls",
                               quantity: breadballQuantity,
+                              price: sidesPrice(
+                                breadballQuantity,
+                                breadballsSize
+                              ).number,
                             },
                           ],
                           customerName: orderState.customerName,
@@ -283,10 +292,7 @@ const CreateCheeseBread: React.FC<CreateSideProps> = (
               </div>
               <div className="m-2 flex justify-center">
                 <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-                  $
-                  {(Math.round(4.99 * cheeseBreadQuantity * 100) / 100).toFixed(
-                    2
-                  )}
+                  ${sidesPrice(cheeseBreadQuantity, null).text}
                 </div>
                 <button
                   className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
@@ -301,6 +307,7 @@ const CreateCheeseBread: React.FC<CreateSideProps> = (
                             size: null,
                             sideOption: "Cheese Bread",
                             quantity: cheeseBreadQuantity,
+                            price: sidesPrice(cheeseBreadQuantity, null).number,
                           },
                         ],
                         customerName: orderState.customerName,
@@ -336,14 +343,10 @@ const SidesInCart: React.FC = () => {
 
   const cartSides = orderState.Sides.map((sides, index) => {
     return (
-      <div key={index} className="flex justify-between">
-        <p key={index} className="m-2 text-lg text-zinc-50">
-          • <span className="font-semibold">{sides.quantity}</span>
-          {" - "}
-          {sides.size} {sides.sideOption}
-        </p>
+      <div key={index} className="flex justify-between text-white">
+        <SidesInCartSpan sides={sides} index={index} />
         <button
-          className="mx-2 text-white"
+          className="mx-2"
           onClick={() => {
             orderDispatch({
               type: "REMOVE",

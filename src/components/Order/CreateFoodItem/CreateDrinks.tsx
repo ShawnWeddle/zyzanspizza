@@ -2,7 +2,8 @@ import { useState } from "react";
 import { z } from "zod";
 import { useOrderContext } from "~/hooks/useOrderContext";
 import { drinksSizeList, drinksOptionsList } from "~/data/names";
-import { drinksPrice } from "~/data/pizzaPrice";
+import { drinksPrice } from "~/data/priceCalculator";
+import { DrinksInCartSpan } from "~/components/CartItems/CartItems";
 
 const sizeEnum = z.enum(drinksSizeList);
 const optionEnum = z.enum(drinksOptionsList);
@@ -19,14 +20,10 @@ const CreateDrinks: React.FC = () => {
 
   const cartDrinks = orderState.Drinks.map((drinks, index) => {
     return (
-      <div key={index} className="flex justify-between">
-        <p key={index} className="m-2 text-lg text-zinc-50">
-          • <span className="font-semibold">{drinks.quantity}</span>
-          {" - "}
-          {drinks.size} {drinks.drinkOption}
-        </p>
+      <div key={index} className="flex justify-between text-white">
+        <DrinksInCartSpan drinks={drinks} index={index} />
         <button
-          className="mx-2 text-white"
+          className="mx-2"
           onClick={() => {
             orderDispatch({
               type: "REMOVE",
@@ -131,7 +128,7 @@ const CreateDrinks: React.FC = () => {
         </div>
         <div className="m-2 flex justify-center">
           <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
-            ${drinksPrice(drinksQuantity, drinksSize)}
+            ${drinksPrice(drinksQuantity, drinksSize).text}
           </div>
           <button
             className="rounded-r-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
@@ -146,6 +143,7 @@ const CreateDrinks: React.FC = () => {
                       drinkOption: drinksOption,
                       size: drinksSize,
                       quantity: drinksQuantity,
+                      price: drinksPrice(drinksQuantity, drinksSize).number,
                     },
                   ],
                   customerName: orderState.customerName,
@@ -156,7 +154,7 @@ const CreateDrinks: React.FC = () => {
             Add to order
           </button>
         </div>
-        <div className="col-span-2 mb-4 w-full bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
+        <div className="col-span-2 m-2 bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
           {cartDrinks.length > 0 ? (
             <>
               <p className="m-2 text-lg text-zinc-50">Drinks in cart:</p>
