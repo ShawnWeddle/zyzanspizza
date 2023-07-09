@@ -4,6 +4,7 @@ import { type NextPage } from "next";
 import Head from "next/head";
 import { useAuthContext } from "~/hooks/useAuthContext";
 import NavBar from "~/components/Nav";
+import UserProfile from "~/components/Profile/userProfile";
 
 const ProfilePage: NextPage = () => {
   const router = useRouter();
@@ -27,7 +28,7 @@ const ProfilePage: NextPage = () => {
       <main className="dark flex min-h-screen flex-col items-center bg-gradient-to-r from-zinc-50 via-amber-50 to-zinc-50 dark:bg-gradient-to-br dark:from-zinc-700 dark:to-zinc-800 dark:text-zinc-50">
         <NavBar />
         <div className="h-16"></div>
-        <div>{userId}</div>
+        {userId && <UserProfile userId={userId} />}
       </main>
     </>
   );

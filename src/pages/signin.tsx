@@ -1,9 +1,17 @@
 import { type NextPage } from "next";
+import { useRouter } from "next/router";
+import { useAuthContext } from "~/hooks/useAuthContext";
 import Head from "next/head";
 import NavBar from "~/components/Nav";
 import SignInForm from "~/components/SignIn/SignIn";
 
 const SignIn: NextPage = () => {
+  const router = useRouter();
+  const { authState } = useAuthContext();
+  const { user } = authState;
+  if (user) {
+    void router.push(`/profile/${user.userId}`);
+  }
   return (
     <>
       <Head>

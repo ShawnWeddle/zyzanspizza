@@ -39,7 +39,7 @@ const NavBar: React.FC = () => {
       <div className="flex justify-center">
         <div>
           <button
-            onClick={() => void router.push("/about")}
+            onClick={() => void router.push("/")}
             className="px-2 py-5 hover:bg-green-900 sm:hidden"
           >
             ABOUT
@@ -47,7 +47,7 @@ const NavBar: React.FC = () => {
         </div>
         <div>
           <button
-            onClick={() => void router.push("/about")}
+            onClick={() => void router.push("/")}
             className="hidden px-2 py-5 hover:bg-green-900 sm:block"
           >
             ABOUT US
