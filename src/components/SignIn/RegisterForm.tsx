@@ -2,7 +2,14 @@ import { useState } from "react";
 import { api } from "../../utils/api";
 import { createUserSchema } from "~/server/api/auth/schema";
 
-const RegisterForm: React.FC = () => {
+type SignInModeType = "LOG-IN" | "REGISTER";
+
+type SetSignInProps = {
+  signInMode: SignInModeType;
+  setSignInMode: React.Dispatch<React.SetStateAction<SignInModeType>>;
+};
+
+const RegisterForm: React.FC<SetSignInProps> = (props: SetSignInProps) => {
   const [firstName, setFirstName] = useState<string>("");
   const [lastName, setLastName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
@@ -58,48 +65,67 @@ const RegisterForm: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col justify-between">
-      <p className="mt-2 text-center text-3xl text-zinc-50">Sign Up</p>
-      <div className="m-5 grid grid-cols-2">
+    <div className="flex flex-col items-center justify-between">
+      <div className="m-2 flex flex-col">
         <p className="col-span-2 text-lg text-zinc-50">Name</p>
-        <input
-          className="my-1 mr-1 rounded bg-white/70 pl-1"
-          type="text"
-          placeholder="First"
-          onChange={(e) => setFirstName(e.target.value)}
-          value={firstName}
-        />
-        <input
-          className="my-1 ml-1 rounded bg-white/70 pl-1"
-          type="text"
-          placeholder="Last"
-          onChange={(e) => setLastName(e.target.value)}
-          value={lastName}
-        />
-        <p className="col-span-2 text-lg text-zinc-50">Email</p>
-        <input
-          className="col-span-2 my-1 rounded bg-white/70 pl-1"
-          type="text"
-          placeholder="Enter Email"
-          onChange={(e) => setEmail(e.target.value)}
-          value={email}
-        />
-        <p className="text-lg text-zinc-50">Password</p>
-        <input
-          className="my-1 rounded bg-white/70 pl-1"
-          type={showPassword ? "text" : "password"}
-          placeholder="Enter password"
-          onChange={(e) => setPassword(e.target.value)}
-          value={password}
-        />
-        <p className="text-lg text-zinc-50">Confirm Password</p>
-        <input
-          className="my-1 rounded bg-white/70 pl-1"
-          type={showPassword ? "text" : "password"}
-          placeholder="Confirm password "
-          onChange={(e) => setPasswordConfirmation(e.target.value)}
-          value={passwordConfirmation}
-        />
+        <div className="flex justify-start">
+          <input
+            className="w-32 rounded-l bg-white/70 pl-1"
+            type="text"
+            placeholder="First"
+            onChange={(e) => setFirstName(e.target.value)}
+            value={firstName}
+          />
+          <input
+            className="w-32 rounded-r border-l bg-white/70 pl-1"
+            type="text"
+            placeholder="Last"
+            onChange={(e) => setLastName(e.target.value)}
+            value={lastName}
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="text-lg text-zinc-50" htmlFor="register-email">
+            Email
+          </label>
+          <input
+            id="register-email"
+            className="my-1 w-64 rounded bg-white/70 pl-1"
+            type="text"
+            placeholder="Enter Email"
+            onChange={(e) => setEmail(e.target.value)}
+            value={email}
+          />
+        </div>
+        <div className="flex flex-col">
+          <label className="text-lg text-zinc-50" htmlFor="register-password">
+            Password
+          </label>
+          <input
+            id="register-password"
+            className="my-1 w-64 rounded bg-white/70 pl-1"
+            type={showPassword ? "text" : "password"}
+            placeholder="Enter password"
+            onChange={(e) => setPassword(e.target.value)}
+            value={password}
+          />
+        </div>
+        <div className="flex flex-col">
+          <label
+            className="text-lg text-zinc-50"
+            htmlFor="register-password-confirm"
+          >
+            Confirm Password
+          </label>
+          <input
+            id="register-password-confirm"
+            className="my-1 w-64 rounded bg-white/70 pl-1"
+            type={showPassword ? "text" : "password"}
+            placeholder="Confirm password "
+            onChange={(e) => setPasswordConfirmation(e.target.value)}
+            value={passwordConfirmation}
+          />
+        </div>
         <div></div>
         <div className="flex justify-center">
           <input
@@ -132,12 +158,24 @@ const RegisterForm: React.FC = () => {
           Sign Up
         </button>
       </div>
+
       {isSignedUp && (
         <div className="m-1 rounded bg-red-50/70 p-2 text-center">
           Thank you for signing up! Log in to place an order
         </div>
       )}
       {signUpErrors && <div className="mx-1 mb-2">{signUpErrorList}</div>}
+      <p className="m-1 text-center text-zinc-50">
+        Already have an account?{" "}
+        <button
+          className="hover:underline"
+          onClick={() => {
+            props.setSignInMode("LOG-IN");
+          }}
+        >
+          Log In
+        </button>
+      </p>
     </div>
   );
 };

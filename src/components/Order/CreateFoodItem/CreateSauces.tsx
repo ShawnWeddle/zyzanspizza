@@ -105,9 +105,19 @@ const OrderSauces: React.FC = () => {
       </div>
       <div className="grid grid-cols-1 border-gray-500 p-3 sm:grid-cols-2 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-0">
         {Sauces}
-        <div className="flex justify-center sm:col-span-2">
+        <div className="m-2 flex justify-center sm:col-span-2">
+          <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
+            $
+            {
+              saucesPrice(
+                Object.values(sauceQuantity).reduce(
+                  (total, quantity) => total + quantity
+                )
+              ).text
+            }
+          </div>
           <button
-            className="m-2 rounded-full bg-red-500 p-1 px-2 text-lg text-white hover:bg-red-400"
+            className="rounded-r-full bg-red-500 p-1 px-2 text-lg text-white hover:bg-red-400"
             onClick={() => {
               const fullSauces = Object.entries(sauceQuantity).filter(
                 (saucePair) => saucePair[1] > 0

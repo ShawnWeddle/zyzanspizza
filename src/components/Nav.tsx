@@ -66,6 +66,8 @@ const NavBar: React.FC = () => {
             onClick={() => {
               if (!user) {
                 void router.push("/signin");
+              } else {
+                void router.push(`/profile/${user.userId}`);
               }
             }}
             className="px-2 py-6 hover:bg-red-600 sm:hidden"
@@ -75,7 +77,10 @@ const NavBar: React.FC = () => {
         </div>
         {user ? (
           <div>
-            <button className="hidden px-2 py-6 hover:bg-red-600 sm:block">
+            <button
+              className="hidden px-2 py-6 hover:bg-red-600 sm:block"
+              onClick={() => void router.push(`/profile/${user.userId}`)}
+            >
               <MdAccountCircle />
             </button>
           </div>

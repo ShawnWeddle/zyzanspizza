@@ -3,7 +3,14 @@ import { api } from "../../utils/api";
 import { logInUserSchema } from "~/server/api/auth/schema";
 import { useAuthContext } from "~/hooks/useAuthContext";
 
-const LogInForm: React.FC = () => {
+type SignInModeType = "LOG-IN" | "REGISTER";
+
+type SetSignInProps = {
+  signInMode: SignInModeType;
+  setSignInMode: React.Dispatch<React.SetStateAction<SignInModeType>>;
+};
+
+const LogInForm: React.FC<SetSignInProps> = (props: SetSignInProps) => {
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
   const [showPassword, setShowPassword] = useState<boolean>(false);
@@ -144,6 +151,17 @@ const LogInForm: React.FC = () => {
           </button>
         </div>
         {logInErrors && <div className="mx-1 mb-2">{logInErrorList}</div>}
+        <p className="m-1 text-center text-zinc-50">
+          Don&apos;t have an account?{" "}
+          <button
+            className="hover:underline"
+            onClick={() => {
+              props.setSignInMode("REGISTER");
+            }}
+          >
+            Sign Up
+          </button>
+        </p>
       </div>
     );
   }

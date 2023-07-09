@@ -142,7 +142,7 @@ export const wholePrice = (order: FullOrderType) => {
     100 *
       [...Pizzas, ...Wings, ...Sides, ...Desserts, ...Drinks, ...Sauces]
         .map((item) => item.price)
-        .reduce((total, price) => total + price)
+        .reduce((total, price) => total + price, 0)
   ) / 100;
   const finalPriceText = finalPrice.toFixed(2);
 

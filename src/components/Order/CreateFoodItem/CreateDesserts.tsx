@@ -87,7 +87,7 @@ const CreateBigBrownie: React.FC<CreateDessertProps> = (
           {props.activeDessert !== "Big Brownie" && (
             <div className="m-2 flex justify-center">
               <button
-                className="rounded-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                className="rounded-full bg-red-500 p-1 px-2 text-lg text-white hover:bg-red-400"
                 onClick={() => {
                   props.setActiveDessert("Big Brownie");
                 }}
@@ -176,7 +176,7 @@ const CreateBigCookie: React.FC<CreateDessertProps> = (
           {props.activeDessert !== "Big Cookie" && (
             <div className="m-2 flex justify-center">
               <button
-                className="rounded-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                className="rounded-full bg-red-500 p-1 px-2 text-lg text-white hover:bg-red-400"
                 onClick={() => {
                   props.setActiveDessert("Big Cookie");
                 }}
@@ -265,7 +265,7 @@ const CreateCinnamonRolls: React.FC<CreateDessertProps> = (
           {props.activeDessert !== "Pull-Apart Cinnamon Rolls" && (
             <div className="m-2 flex justify-center">
               <button
-                className="rounded-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                className="rounded-full bg-red-500 p-1 px-2 text-lg text-white hover:bg-red-400"
                 onClick={() => {
                   props.setActiveDessert("Pull-Apart Cinnamon Rolls");
                 }}

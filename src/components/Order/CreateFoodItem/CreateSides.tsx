@@ -116,7 +116,7 @@ const CreateBreadsticks: React.FC<CreateSideProps> = (
           {props.activeSide !== "Breadsticks" && (
             <div className="m-2 flex justify-center">
               <button
-                className="rounded-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                className="rounded-full bg-red-500 p-1 px-2 text-lg text-white hover:bg-red-400"
                 onClick={() => {
                   props.setActiveSide("Breadsticks");
                 }}
@@ -233,7 +233,7 @@ const CreateBreadballs: React.FC<CreateSideProps> = (
           {props.activeSide !== "Bread Balls" && (
             <div className="m-2 flex justify-center">
               <button
-                className="rounded-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                className="rounded-full bg-red-500 p-1 px-2 text-lg text-white hover:bg-red-400"
                 onClick={() => {
                   props.setActiveSide("Bread Balls");
                 }}
@@ -323,7 +323,7 @@ const CreateCheeseBread: React.FC<CreateSideProps> = (
           {props.activeSide !== "Cheese Bread" && (
             <div className="m-2 flex justify-center">
               <button
-                className="rounded-full bg-red-500 p-1 pr-2 text-lg text-white hover:bg-red-400"
+                className="rounded-full bg-red-500 p-1 px-2 text-lg text-white hover:bg-red-400"
                 onClick={() => {
                   props.setActiveSide("Cheese Bread");
                 }}
