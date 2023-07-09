@@ -19,7 +19,7 @@ const UserProfile: React.FC<UserProfileProps> = (props: UserProfileProps) => {
       <div className="bg-gradient-to-br from-blue-700 to-blue-800 p-2 text-center text-4xl text-zinc-50 sm:rounded-t">
         {user?.firstName} {user?.lastName}
       </div>
-      <div className="max-h-full border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-blue-800/10 sm:p-1">
+      <div className="sm:bg-bluegit -800/10 max-h-full border-gray-500 p-3 sm:rounded-b sm:border-2 sm:p-1">
         <p>Email: {user?.email}</p>
         <p>Orders:</p>
         <div>
