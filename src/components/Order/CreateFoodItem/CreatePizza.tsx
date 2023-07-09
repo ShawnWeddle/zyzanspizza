@@ -272,6 +272,7 @@ const CreatePizzaOrder: React.FC = () => {
                           specialBakeInstructions: specialBake,
                           specialCutInstructions: specialCut,
                           isSpecialtyPizza: false,
+                          removedToppings: [],
                           price: pizzaPrice(
                             pizzaQuantity,
                             pizzaSize,

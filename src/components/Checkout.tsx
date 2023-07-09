@@ -194,10 +194,18 @@ const CheckoutList: React.FC = () => {
         <div className="absolute top-4 left-2">
           <div className="text-base">
             <button
-              className="hover:text-zinc-800"
+              className="hidden hover:text-zinc-800 sm:block"
               onClick={() => void router.push("/order")}
             >
               🡄 Edit Order
+            </button>
+          </div>
+          <div className="text-base">
+            <button
+              className="hover:text-zinc-800 sm:hidden"
+              onClick={() => void router.push("/order")}
+            >
+              🡄 Edit
             </button>
           </div>
         </div>

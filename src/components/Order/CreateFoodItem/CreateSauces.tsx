@@ -103,7 +103,7 @@ const OrderSauces: React.FC = () => {
       <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-4xl text-zinc-50 sm:rounded-t">
         Sauces
       </div>
-      <div className="grid grid-cols-1 border-gray-500 p-3 sm:grid-cols-2 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-0">
+      <div className="border-gray-500 p-3 sm:grid sm:grid-cols-2 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-0">
         {Sauces}
         <div className="m-2 flex justify-center sm:col-span-2">
           <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
@@ -146,7 +146,7 @@ const OrderSauces: React.FC = () => {
             Add to order
           </button>
         </div>
-        <div className="col-span-2 m-2 bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
+        <div className="bg-gradient-to-br from-blue-700 to-blue-800 sm:col-span-2 sm:m-2 sm:rounded-xl">
           {cartSauces.length > 0 ? (
             <>
               <p className="m-2 text-lg text-zinc-50">Sauces in cart:</p>

@@ -41,6 +41,9 @@ type Pizza {
   specialBakeInstructions String
   specialCutInstructions  String
   isSpecialtyPizza        Boolean
+  specialtyPizzaName      String?
+  removedToppings         String[]
+  price                   Float
 }
 
 type Wings {
@@ -50,13 +53,16 @@ type Wings {
   bone     Boolean
   sauce    String
   quantity Int
+  price    Float
 }
 
 type Sides {
   id         String
   foodType   String
   sideOption String
+  size       String
   quantity   Int
+  price      Float
 }
 
 type Desserts {
@@ -64,6 +70,7 @@ type Desserts {
   foodType      String
   dessertOption String
   quantity      Int
+  price         Float
 }
 
 type Drinks {
@@ -72,6 +79,7 @@ type Drinks {
   drinkOption String
   size        String
   quantity    Int
+  price       Float
 }
 
 type Sauces {
@@ -79,4 +87,5 @@ type Sauces {
   foodType    String
   sauceOption String
   quantity    Int
+  price       Float
 }

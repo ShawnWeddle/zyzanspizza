@@ -36,6 +36,7 @@ export type PizzaType = {
   specialCutInstructions: SpecialCutList;
   isSpecialtyPizza: boolean;
   specialtyPizzaName?: SpecialtyPizzaNameType;
+  removedToppings: PizzaToppingsList[] | SpecialtyToppingsType[];
   price: number;
 }
 
