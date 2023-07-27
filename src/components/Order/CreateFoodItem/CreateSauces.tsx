@@ -51,7 +51,6 @@ const OrderSauces: React.FC = () => {
               type: "REMOVE",
               payload: {
                 order: [sauces],
-                customerName: orderState.customerName,
               },
             });
           }}
@@ -103,7 +102,7 @@ const OrderSauces: React.FC = () => {
       <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-4xl text-zinc-50 sm:rounded-t">
         Sauces
       </div>
-      <div className="border-gray-500 p-3 sm:grid sm:grid-cols-2 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-0">
+      <div className="border-gray-500 pt-3 sm:grid sm:grid-cols-2 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:pt-0">
         {Sauces}
         <div className="m-2 flex justify-center sm:col-span-2">
           <div className="rounded-l-full border bg-white p-1 pl-2 text-lg font-semibold dark:text-black">
@@ -130,6 +129,7 @@ const OrderSauces: React.FC = () => {
                     sauceOption: SauceNamer(saucePair[0]),
                     quantity: saucePair[1],
                     price: saucesPrice(saucePair[1]).number,
+                    description: `${saucePair[1]} - ${saucePair[0]}`,
                   };
                 }
               );
@@ -137,7 +137,6 @@ const OrderSauces: React.FC = () => {
                 type: "ADD",
                 payload: {
                   order: newSauces,
-                  customerName: orderState.customerName,
                 },
               });
               setSauceQuantity(emptySauces);
@@ -146,7 +145,7 @@ const OrderSauces: React.FC = () => {
             Add to order
           </button>
         </div>
-        <div className="bg-gradient-to-br from-blue-700 to-blue-800 sm:col-span-2 sm:m-2 sm:rounded-xl">
+        <div className="bg-gradient-to-br from-blue-700 to-blue-800 py-0.5 sm:col-span-2 sm:m-2 sm:rounded-xl">
           {cartSauces.length > 0 ? (
             <>
               <p className="m-2 text-lg text-zinc-50">Sauces in cart:</p>

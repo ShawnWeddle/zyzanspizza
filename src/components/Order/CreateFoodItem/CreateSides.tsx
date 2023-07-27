@@ -27,6 +27,8 @@ const CreateBreadsticks: React.FC<CreateSideProps> = (
 
   const { orderState, orderDispatch } = useOrderContext();
 
+  const sidesDescription = `${breadstickQuantity} - ${breadsticksSize} Breadsticks`;
+
   const sizeList = breadsticksSizeList.map((size, index) => {
     return (
       <div key={index} className="m-1 flex gap-2">
@@ -100,9 +102,9 @@ const CreateBreadsticks: React.FC<CreateSideProps> = (
                                 breadstickQuantity,
                                 breadsticksSize
                               ).number,
+                              description: sidesDescription,
                             },
                           ],
-                          customerName: orderState.customerName,
                         },
                       });
                     }}
@@ -140,6 +142,8 @@ const CreateBreadballs: React.FC<CreateSideProps> = (
   const [breadballQuantity, setBreadballQuantity] = useState<number>(1);
 
   const { orderState, orderDispatch } = useOrderContext();
+
+  const sidesDescription = `${breadballQuantity} - ${breadballsSize} Bread Balls`;
 
   const sizeList = breadBallsSizeList.map((size, index) => {
     return (
@@ -217,9 +221,9 @@ const CreateBreadballs: React.FC<CreateSideProps> = (
                                 breadballQuantity,
                                 breadballsSize
                               ).number,
+                              description: sidesDescription,
                             },
                           ],
-                          customerName: orderState.customerName,
                         },
                       });
                     }}
@@ -254,6 +258,8 @@ const CreateCheeseBread: React.FC<CreateSideProps> = (
   const [cheeseBreadQuantity, setCheeseBreadQuantity] = useState<number>(1);
 
   const { orderState, orderDispatch } = useOrderContext();
+
+  const sidesDescription = `${cheeseBreadQuantity} - Cheese Bread`;
 
   return (
     <div className="my-2">
@@ -304,13 +310,13 @@ const CreateCheeseBread: React.FC<CreateSideProps> = (
                           {
                             id: crypto.randomUUID(),
                             foodType: "SIDES",
-                            size: null,
+                            size: "1-piece",
                             sideOption: "Cheese Bread",
                             quantity: cheeseBreadQuantity,
                             price: sidesPrice(cheeseBreadQuantity, null).number,
+                            description: sidesDescription,
                           },
                         ],
-                        customerName: orderState.customerName,
                       },
                     });
                   }}
@@ -352,7 +358,6 @@ const SidesInCart: React.FC = () => {
               type: "REMOVE",
               payload: {
                 order: [sides],
-                customerName: orderState.customerName,
               },
             });
           }}

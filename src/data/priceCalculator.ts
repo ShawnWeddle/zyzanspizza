@@ -8,6 +8,7 @@ import type {
 
 import { specialtySizeToPrice } from "~/data/names";
 import type { FullOrderType } from "./ordertypes";
+import type { Order } from "@prisma/client";
 
 type PizzaSizeType = typeof pizzaSizeList[number];
 type WingsSizeType = typeof wingsSizeList[number];
@@ -141,6 +142,22 @@ export const wholePrice = (order: FullOrderType) => {
   Math.round(
     100 *
       [...Pizzas, ...Wings, ...Sides, ...Desserts, ...Drinks, ...Sauces]
+        .map((item) => item.price)
+        .reduce((total, price) => total + price, 0)
+  ) / 100;
+  const finalPriceText = finalPrice.toFixed(2);
+
+  return {number: finalPrice, text: finalPriceText}
+}
+
+export const wholeOrderedPrice = (order: Order) => {
+  const { pizzas, sides, wings, desserts, drinks, sauces } =
+    order;
+
+  const finalPrice =
+  Math.round(
+    100 *
+      [...pizzas, ...wings, ...sides, ...desserts, ...drinks, ...sauces]
         .map((item) => item.price)
         .reduce((total, price) => total + price, 0)
   ) / 100;

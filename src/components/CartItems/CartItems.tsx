@@ -6,7 +6,6 @@ import type {
   DrinksType,
   SaucesType,
 } from "~/data/ordertypes";
-import { sizeToInches } from "~/data/names";
 
 type PizzaInCartProps = {
   pizza: PizzaType;
@@ -17,29 +16,11 @@ export const PizzaInCartSpan: React.FC<PizzaInCartProps> = (
   props: PizzaInCartProps
 ) => {
   const { pizza, index } = props;
-  if (pizza.isSpecialtyPizza) {
-    return (
-      <p key={index} className="m-2 w-full text-lg">
-        • <span className="font-semibold">{pizza.quantity}</span>
-        {" - "}
-        {sizeToInches[pizza.size]}&quot; {pizza.crust}{" "}
-        {pizza.specialtyPizzaName} {pizza.quantity > 1 ? "pizzas" : "pizza"}
-        {pizza.crustFlavor !== "None" ? ` with ${pizza.crustFlavor} crust` : ""}
-      </p>
-    );
-  } else {
-    return (
-      <p key={index} className="m-2 w-full text-lg">
-        • <span className="font-semibold">{pizza.quantity}</span>
-        {" - "}
-        {sizeToInches[pizza.size]}&quot; {pizza.crust}{" "}
-        {pizza.quantity > 1 ? "pizzas" : "pizza"} with {pizza.sauce}
-        {pizza.toppings.length > 0 ? ", " : ""}
-        {pizza.toppings.join(", ")}
-        {pizza.crustFlavor !== "None" ? `, and ${pizza.crustFlavor} crust` : ""}
-      </p>
-    );
-  }
+  return (
+    <p key={index} className="m-2 w-full text-lg">
+      • {pizza.description}
+    </p>
+  );
 };
 
 type WingsInCartProps = {
@@ -53,9 +34,7 @@ export const WingsInCartSpan: React.FC<WingsInCartProps> = (
   const { wings, index } = props;
   return (
     <p key={index} className="m-2 w-full text-lg">
-      • <span className="font-semibold">{wings.quantity}</span>
-      {" - "}
-      {wings.size} {wings.sauce} {wings.bone} Wings
+      • {wings.description}
     </p>
   );
 };
@@ -71,9 +50,7 @@ export const SidesInCartSpan: React.FC<SidesInCartProps> = (
   const { sides, index } = props;
   return (
     <p key={index} className="m-2 w-full text-lg">
-      • <span className="font-semibold">{sides.quantity}</span>
-      {" - "}
-      {sides.size} {sides.sideOption}
+      • {sides.description}
     </p>
   );
 };
@@ -89,9 +66,7 @@ export const DessertsInCartSpan: React.FC<DessertsInCartProps> = (
   const { desserts, index } = props;
   return (
     <p key={index} className="m-2 w-full text-lg">
-      • <span className="font-semibold">{desserts.quantity}</span>
-      {" - "}
-      {desserts.dessertOption}
+      • {desserts.description}
     </p>
   );
 };
@@ -107,9 +82,7 @@ export const DrinksInCartSpan: React.FC<DrinksInCartProps> = (
   const { drinks, index } = props;
   return (
     <p key={index} className="m-2 w-full text-lg">
-      • <span className="font-semibold">{drinks.quantity}</span>
-      {" - "}
-      {drinks.size} {drinks.drinkOption}
+      • {drinks.description}
     </p>
   );
 };
@@ -125,9 +98,7 @@ export const SaucesInCartSpan: React.FC<SaucesInCartProps> = (
   const { sauces, index } = props;
   return (
     <p key={index} className="m-2 w-full text-lg">
-      • <span className="font-semibold">{sauces.quantity}</span>
-      {" - "}
-      {sauces.sauceOption}
+      • {sauces.description}
     </p>
   );
 };

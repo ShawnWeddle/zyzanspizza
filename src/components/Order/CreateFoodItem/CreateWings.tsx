@@ -2,6 +2,11 @@ import { useState } from "react";
 import { z } from "zod";
 import { useOrderContext } from "~/hooks/useOrderContext";
 import { wingsSauceList, wingsSizeList } from "~/data/names";
+import type {
+  WingsSizeListType,
+  WingsSauceListType,
+  WingsBoneListType,
+} from "~/data/ordertypes";
 import { wingsPrice } from "~/data/priceCalculator";
 import { WingsInCartSpan } from "~/components/CartItems/CartItems";
 
@@ -9,16 +14,15 @@ const sizeEnum = z.enum(wingsSizeList);
 const boneEnum = z.enum(["Bone-in", "Boneless"]);
 const sauceEnum = z.enum(wingsSauceList);
 
-type WingsSizeType = (typeof wingsSizeList)[number];
-type WingsSauceType = (typeof wingsSauceList)[number];
-
 const CreateWings: React.FC = () => {
-  const [wingsSize, setWingsSize] = useState<WingsSizeType>("12-piece");
-  const [wingsSauce, setWingsSauce] = useState<WingsSauceType>("Plain");
-  const [wingsBone, setWingsBone] = useState<"Bone-in" | "Boneless">("Bone-in");
+  const [wingsSize, setWingsSize] = useState<WingsSizeListType>("12-piece");
+  const [wingsSauce, setWingsSauce] = useState<WingsSauceListType>("Plain");
+  const [wingsBone, setWingsBone] = useState<WingsBoneListType>("Bone-in");
   const [wingsQuantity, setWingsQuantity] = useState<number>(1);
 
   const { orderState, orderDispatch } = useOrderContext();
+
+  const wingsDescription = `${wingsQuantity} - ${wingsSize} ${wingsBone} ${wingsSauce} Wings`;
 
   const cartWings = orderState.Wings.map((wings, index) => {
     return (
@@ -31,7 +35,6 @@ const CreateWings: React.FC = () => {
               type: "REMOVE",
               payload: {
                 order: [wings],
-                customerName: orderState.customerName,
               },
             });
           }}
@@ -114,7 +117,7 @@ const CreateWings: React.FC = () => {
       <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-4xl text-zinc-50 sm:rounded-t">
         Wings
       </div>
-      <div className="max-h-full border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
+      <div className="max-h-full border-gray-500 pt-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:pt-1">
         <div className="grid grid-cols-2">
           <div className="flex items-center justify-center">
             <form>{boneList}</form>
@@ -187,9 +190,9 @@ const CreateWings: React.FC = () => {
                         sauce: wingsSauce,
                         price: wingsPrice(wingsQuantity, wingsSize, wingsBone)
                           .number,
+                        description: wingsDescription,
                       },
                     ],
-                    customerName: orderState.customerName,
                   },
                 });
               }}
@@ -197,18 +200,18 @@ const CreateWings: React.FC = () => {
               Add to order
             </button>
           </div>
-          <div className="col-span-2 m-2 bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
-            {cartWings.length > 0 ? (
-              <>
-                <p className="m-2 text-lg text-zinc-50">Wings in cart:</p>
-                {cartWings}
-              </>
-            ) : (
-              <p className="m-2 text-lg font-semibold text-red-200">
-                NO WINGS IN CART
-              </p>
-            )}
-          </div>
+        </div>
+        <div className="bg-gradient-to-br from-blue-700 to-blue-800 py-0.5 sm:m-2 sm:rounded-xl">
+          {cartWings.length > 0 ? (
+            <>
+              <p className="m-2 text-lg text-zinc-50">Wings in cart:</p>
+              {cartWings}
+            </>
+          ) : (
+            <p className="m-2 text-lg font-semibold text-red-200">
+              NO WINGS IN CART
+            </p>
+          )}
         </div>
       </div>
     </div>

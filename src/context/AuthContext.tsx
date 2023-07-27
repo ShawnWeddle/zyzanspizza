@@ -1,5 +1,6 @@
 import { createContext, useReducer, useEffect } from "react";
 import { setToken } from "~/utils/api";
+import type { UserType } from "~/data/ordertypes";
 
 export const AuthContext = createContext<ContextType | null>(null);
 
@@ -10,14 +11,6 @@ type ContextType = {
 
 type AuthContextProviderProps = {
   children: React.ReactNode;
-};
-
-export type UserType = {
-  token: string;
-  userId: string;
-  email: string;
-  firstName: string;
-  lastName: string;
 };
 
 type AuthReducerState = { user: UserType | null };

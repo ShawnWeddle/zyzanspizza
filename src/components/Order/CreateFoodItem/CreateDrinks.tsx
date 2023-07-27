@@ -18,6 +18,8 @@ const CreateDrinks: React.FC = () => {
 
   const { orderState, orderDispatch } = useOrderContext();
 
+  const drinksDescription = `${drinksQuantity} - ${drinksSize} ${drinksOption}`;
+
   const cartDrinks = orderState.Drinks.map((drinks, index) => {
     return (
       <div key={index} className="flex justify-between text-white">
@@ -29,7 +31,6 @@ const CreateDrinks: React.FC = () => {
               type: "REMOVE",
               payload: {
                 order: [drinks],
-                customerName: orderState.customerName,
               },
             });
           }}
@@ -81,7 +82,7 @@ const CreateDrinks: React.FC = () => {
       <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-4xl text-zinc-50 sm:rounded-t">
         Drinks
       </div>
-      <div className="max-h-full border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
+      <div className="max-h-full border-gray-500 pt-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:pt-1">
         <div className="grid grid-cols-2">
           <div className="my-4 flex justify-center">
             <form>
@@ -144,9 +145,9 @@ const CreateDrinks: React.FC = () => {
                       size: drinksSize,
                       quantity: drinksQuantity,
                       price: drinksPrice(drinksQuantity, drinksSize).number,
+                      description: drinksDescription,
                     },
                   ],
-                  customerName: orderState.customerName,
                 },
               });
             }}
@@ -154,7 +155,7 @@ const CreateDrinks: React.FC = () => {
             Add to order
           </button>
         </div>
-        <div className="col-span-2 m-2 bg-gradient-to-br from-blue-700 to-blue-800 sm:rounded-xl">
+        <div className="bg-gradient-to-br from-blue-700 to-blue-800 py-0.5 sm:m-2 sm:rounded-xl">
           {cartDrinks.length > 0 ? (
             <>
               <p className="m-2 text-lg text-zinc-50">Drinks in cart:</p>

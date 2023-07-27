@@ -12,11 +12,11 @@ type OrderContextProviderProps = {
   children: React.ReactNode;
 };
 
-type Action = "ADD" | "REMOVE" | "NAME_CHANGE";
+type Action = "ADD" | "REMOVE";
 
 type OrderReducerAction = {
   type: Action;
-  payload: { order: AnyFoodType[]; customerName: string | null };
+  payload: { order: AnyFoodType[] };
 };
 
 export const orderReducer = (
@@ -157,8 +157,6 @@ export const orderReducer = (
   } else {
     console.log("D");
   }
-
-  newState = { ...newState, customerName: payload.customerName };
   localStorage.setItem("order", JSON.stringify(newState));
   return newState;
 };
@@ -173,7 +171,6 @@ export const OrderContextProvider = ({
     Desserts: [],
     Drinks: [],
     Sauces: [],
-    customerName: null,
   });
 
   useEffect(() => {
@@ -194,7 +191,6 @@ export const OrderContextProvider = ({
             ...order.Drinks,
             ...order.Sauces,
           ],
-          customerName: "",
         },
       });
     }

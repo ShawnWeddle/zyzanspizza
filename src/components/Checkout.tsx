@@ -1,5 +1,8 @@
+import { useState } from "react";
 import { useRouter } from "next/router";
 import { useOrderContext } from "~/hooks/useOrderContext";
+import { useAuthContext } from "~/hooks/useAuthContext";
+import { api } from "~/utils/api";
 import {
   PizzaInCartSpan,
   WingsInCartSpan,
@@ -9,21 +12,58 @@ import {
   SaucesInCartSpan,
 } from "./CartItems/CartItems";
 import { wholePrice } from "~/data/priceCalculator";
+import { orderSchema } from "~/server/api/order/schema";
 
 const CheckoutList: React.FC = () => {
   const router = useRouter();
   const { orderState, orderDispatch } = useOrderContext();
-  const { Pizzas, Sides, Wings, Desserts, Drinks, Sauces, customerName } =
-    orderState;
+  const { authState, authDispatch } = useAuthContext();
+  const { user } = authState;
+  const { Pizzas, Sides, Wings, Desserts, Drinks, Sauces } = orderState;
+  const allFoodItems = [
+    ...Pizzas,
+    ...Sides,
+    ...Wings,
+    ...Desserts,
+    ...Drinks,
+    ...Sauces,
+  ];
+
+  const [hasCheckedOut, setHasCheckedOut] = useState<boolean>(false);
+
+  const placeOrder = api.order.createOrder.useMutation();
+
+  const handleSubmit = () => {
+    const orderValidation = orderSchema.safeParse(orderState);
+    if (user && orderValidation) {
+      placeOrder.mutate(
+        {
+          ...orderState,
+          customer: user,
+        },
+        {
+          onSuccess() {
+            setHasCheckedOut(true);
+            orderDispatch({
+              type: "REMOVE",
+              payload: {
+                order: [...allFoodItems],
+              },
+            });
+          },
+        }
+      );
+    }
+  };
 
   const PizzaList = Pizzas.map((pizza, index) => {
     return (
       <div
         key={`pizza-${index}`}
-        className="flex items-center even:bg-green-800/10 hover:bg-green-800/20"
+        className="flex items-center odd:bg-green-800/10 hover:bg-green-800/20"
       >
         <PizzaInCartSpan pizza={pizza} index={index} />
-        <p className="font-bold">${pizza.price}</p>
+        <p className="font-bold">${pizza.price.toFixed(2)}</p>
         <div>
           <button
             className="mx-4 rounded-full font-semibold text-red-500 hover:text-zinc-50"
@@ -32,7 +72,6 @@ const CheckoutList: React.FC = () => {
                 type: "REMOVE",
                 payload: {
                   order: [pizza],
-                  customerName: orderState.customerName,
                 },
               });
             }}
@@ -47,10 +86,10 @@ const CheckoutList: React.FC = () => {
     return (
       <div
         key={`wings-${index}`}
-        className="flex items-center even:bg-green-800/10 hover:bg-green-800/20"
+        className="flex items-center odd:bg-green-800/10 hover:bg-green-800/20"
       >
         <WingsInCartSpan wings={wings} index={index} />
-        <p className="font-bold">${wings.price}</p>
+        <p className="font-bold">${wings.price.toFixed(2)}</p>
         <div>
           <button
             className="mx-4 rounded-full font-semibold text-red-500 hover:text-zinc-50"
@@ -59,7 +98,6 @@ const CheckoutList: React.FC = () => {
                 type: "REMOVE",
                 payload: {
                   order: [wings],
-                  customerName: orderState.customerName,
                 },
               });
             }}
@@ -74,10 +112,10 @@ const CheckoutList: React.FC = () => {
     return (
       <div
         key={`sides-${index}`}
-        className="flex items-center even:bg-green-800/10 hover:bg-green-800/20"
+        className="flex items-center odd:bg-green-800/10 hover:bg-green-800/20"
       >
         <SidesInCartSpan sides={sides} index={index} />
-        <p className="font-bold">${sides.price}</p>
+        <p className="font-bold">${sides.price.toFixed(2)}</p>
         <div>
           <button
             className="mx-4 rounded-full font-semibold text-red-500 hover:text-zinc-50"
@@ -86,7 +124,6 @@ const CheckoutList: React.FC = () => {
                 type: "REMOVE",
                 payload: {
                   order: [sides],
-                  customerName: orderState.customerName,
                 },
               });
             }}
@@ -101,10 +138,10 @@ const CheckoutList: React.FC = () => {
     return (
       <div
         key={`desserts-${index}`}
-        className="flex items-center even:bg-green-800/10 hover:bg-green-800/20"
+        className="flex items-center odd:bg-green-800/10 hover:bg-green-800/20"
       >
         <DessertsInCartSpan desserts={desserts} index={index} />
-        <p className="font-bold">${desserts.price}</p>
+        <p className="font-bold">${desserts.price.toFixed(2)}</p>
         <div>
           <button
             className="mx-4 rounded-full font-semibold text-red-500 hover:text-zinc-50"
@@ -113,7 +150,6 @@ const CheckoutList: React.FC = () => {
                 type: "REMOVE",
                 payload: {
                   order: [desserts],
-                  customerName: orderState.customerName,
                 },
               });
             }}
@@ -128,10 +164,10 @@ const CheckoutList: React.FC = () => {
     return (
       <div
         key={`drinks-${index}`}
-        className="flex items-center even:bg-green-800/10 hover:bg-green-800/20"
+        className="flex items-center odd:bg-green-800/10 hover:bg-green-800/20"
       >
         <DrinksInCartSpan drinks={drinks} index={index} />
-        <p className="font-bold">${drinks.price}</p>
+        <p className="font-bold">${drinks.price.toFixed(2)}</p>
         <div>
           <button
             className="mx-4 rounded-full font-semibold text-red-500 hover:text-zinc-50"
@@ -140,7 +176,6 @@ const CheckoutList: React.FC = () => {
                 type: "REMOVE",
                 payload: {
                   order: [drinks],
-                  customerName: orderState.customerName,
                 },
               });
             }}
@@ -155,10 +190,10 @@ const CheckoutList: React.FC = () => {
     return (
       <div
         key={`sauces-${index}`}
-        className="flex items-center even:bg-green-800/10 hover:bg-green-800/20"
+        className="flex items-center odd:bg-green-800/10 hover:bg-green-800/20"
       >
         <SaucesInCartSpan sauces={sauces} index={index} />
-        <p className="font-bold">${sauces.price}</p>
+        <p className="font-bold">${sauces.price.toFixed(2)}</p>
         <div>
           <button
             className="mx-4 rounded-full font-semibold text-red-500 hover:text-zinc-50"
@@ -167,7 +202,6 @@ const CheckoutList: React.FC = () => {
                 type: "REMOVE",
                 payload: {
                   order: [sauces],
-                  customerName: orderState.customerName,
                 },
               });
             }}
@@ -211,7 +245,12 @@ const CheckoutList: React.FC = () => {
         </div>
         Your Order
       </div>
-      <div className="max-h-full border-gray-500 p-3 sm:rounded-b sm:border-2 sm:bg-green-800/10 sm:p-1">
+      <div className="max-h-full border-gray-500 sm:rounded-b sm:border-2 sm:bg-green-800/10">
+        {user && (
+          <div className="bg-gradient-to-r from-blue-700 to-blue-800 text-center text-white">
+            {user.email}
+          </div>
+        )}
         {FoodItemList.length > 0 ? (
           FoodItemList
         ) : (
@@ -226,11 +265,31 @@ const CheckoutList: React.FC = () => {
         <div className="m-2 flex justify-center">
           <button
             className="rounded-full bg-red-500 p-1 px-2 text-lg text-white hover:bg-red-400 disabled:bg-red-200"
-            disabled={FoodItemList.length === 0}
+            disabled={!user || FoodItemList.length === 0}
+            onClick={() => {
+              handleSubmit();
+            }}
           >
             PLACE ORDER
           </button>
         </div>
+        {hasCheckedOut && (
+          <p className="p-1 text-center">Thank you for placing your order!</p>
+        )}
+        {!user && (
+          <div className="text-center">
+            Please{" "}
+            <button
+              className="hover:underline"
+              onClick={() => {
+                void router.push("/signin");
+              }}
+            >
+              Log In
+            </button>{" "}
+            to place your order
+          </div>
+        )}
       </div>
     </div>
   );

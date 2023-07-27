@@ -20,6 +20,8 @@ const CreateBigBrownie: React.FC<CreateDessertProps> = (
 
   const { orderState, orderDispatch } = useOrderContext();
 
+  const dessertDescription = `${brownieQuantity} - Big Brownie`;
+
   return (
     <div className="my-2">
       <div className="bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-xl text-zinc-50 sm:rounded-t sm:p-0">
@@ -72,9 +74,9 @@ const CreateBigBrownie: React.FC<CreateDessertProps> = (
                             dessertOption: "Big Brownie",
                             quantity: brownieQuantity,
                             price: dessertsPrice(brownieQuantity).number,
+                            description: dessertDescription,
                           },
                         ],
-                        customerName: orderState.customerName,
                       },
                     });
                   }}
@@ -108,6 +110,8 @@ const CreateBigCookie: React.FC<CreateDessertProps> = (
   const [cookieQuantity, setCookieQuantity] = useState<number>(1);
 
   const { orderState, orderDispatch } = useOrderContext();
+
+  const dessertDescription = `${cookieQuantity} - Big Cookie`;
 
   return (
     <div className="my-2">
@@ -161,9 +165,9 @@ const CreateBigCookie: React.FC<CreateDessertProps> = (
                             dessertOption: "Big Cookie",
                             quantity: cookieQuantity,
                             price: dessertsPrice(cookieQuantity).number,
+                            description: dessertDescription,
                           },
                         ],
-                        customerName: orderState.customerName,
                       },
                     });
                   }}
@@ -197,6 +201,8 @@ const CreateCinnamonRolls: React.FC<CreateDessertProps> = (
   const [cinnamonRollQuantity, setCinnamonRollQuantity] = useState<number>(1);
 
   const { orderState, orderDispatch } = useOrderContext();
+
+  const dessertDescription = `${cinnamonRollQuantity} - Pull-Apart Cinnamon Rolls`;
 
   return (
     <div className="my-2">
@@ -250,9 +256,9 @@ const CreateCinnamonRolls: React.FC<CreateDessertProps> = (
                             dessertOption: "Pull-Apart Cinnamon Rolls",
                             quantity: cinnamonRollQuantity,
                             price: dessertsPrice(cinnamonRollQuantity).number,
+                            description: dessertDescription,
                           },
                         ],
-                        customerName: orderState.customerName,
                       },
                     });
                   }}
@@ -294,7 +300,6 @@ const DessertsInCart: React.FC = () => {
               type: "REMOVE",
               payload: {
                 order: [desserts],
-                customerName: orderState.customerName,
               },
             });
           }}

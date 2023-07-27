@@ -10,7 +10,16 @@ import {
   specialtyPizzaNameList,
   sizeToInches,
 } from "~/data/names";
-import type { pizzaSauceList, SpecialtyToppingsType } from "~/data/names";
+import type {
+  PizzaSizeListType,
+  PizzaCrustListType,
+  PizzaSauceListType,
+  PizzaCrustFlavorListType,
+  SpecialBakeListType,
+  SpecialCutListType,
+  SpecialtyPizzaNameType,
+} from "~/data/ordertypes";
+import type { SpecialtyToppingsType } from "~/data/names";
 import { specialtyPizzaPrice } from "~/data/priceCalculator";
 import specialtyToppingAlg from "~/data/specialtyToppingAlg";
 import { useOrderContext } from "~/hooks/useOrderContext";
@@ -32,12 +41,10 @@ const CreateSpecialtyPizzaOrder: React.FC = () => {
   const { orderState, orderDispatch } = useOrderContext();
 
   const [specialtyPizza, setSpecialtyPizza] =
-    useState<(typeof specialtyPizzaNameList)[number]>("Deluxe");
-  const [pizzaSize, setPizzaSize] =
-    useState<(typeof pizzaSizeList)[number]>("Large");
-  const [pizzaCrust, setPizzaCrust] =
-    useState<(typeof pizzaCrustList)[number]>("Original");
-  const [pizzaSauce] = useState<(typeof pizzaSauceList)[number]>("Pizza sauce");
+    useState<SpecialtyPizzaNameType>("Deluxe");
+  const [pizzaSize, setPizzaSize] = useState<PizzaSizeListType>("Large");
+  const [pizzaCrust, setPizzaCrust] = useState<PizzaCrustListType>("Original");
+  const [pizzaSauce] = useState<PizzaSauceListType>("Pizza sauce");
   const [pizzaToppings, setPizzaToppings] = useState<SpecialtyToppingsType[]>(
     specialtyToppingAlg(specialtyPizza)
   );
@@ -45,12 +52,17 @@ const CreateSpecialtyPizzaOrder: React.FC = () => {
     SpecialtyToppingsType[]
   >(specialtyToppingAlg(specialtyPizza));
   const [pizzaCrustFlavor, setPizzaCrustFlavor] =
-    useState<(typeof pizzaCrustFlavorList)[number]>("None");
-  const [specialBake, setSpecialBake] =
-    useState<(typeof specialBakeList)[number]>("Normal");
+    useState<PizzaCrustFlavorListType>("None");
+  const [specialBake, setSpecialBake] = useState<SpecialBakeListType>("Normal");
   const [specialCut, setSpecialCut] =
-    useState<(typeof specialCutList)[number]>("Triangle Cut");
+    useState<SpecialCutListType>("Triangle Cut");
   const [pizzaQuantity, setPizzaQuantity] = useState<number>(1);
+
+  const pizzaDescription = `${pizzaQuantity} - ${
+    sizeToInches[pizzaSize]
+  }" ${pizzaCrust} ${specialtyPizza} ${
+    pizzaQuantity > 1 ? "pizzas" : "pizza"
+  } ${pizzaCrustFlavor !== "None" ? `, and ${pizzaCrustFlavor} crust` : ""}`;
 
   const cartPizzas = orderState.Pizzas.map((pizza, index) => {
     return (
@@ -63,7 +75,6 @@ const CreateSpecialtyPizzaOrder: React.FC = () => {
               type: "REMOVE",
               payload: {
                 order: [pizza],
-                customerName: orderState.customerName,
               },
             });
           }}
@@ -211,14 +222,7 @@ const CreateSpecialtyPizzaOrder: React.FC = () => {
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
         <div className="mb-4 flex w-full flex-col justify-between bg-gradient-to-br from-green-700 to-green-800 sm:rounded-xl">
           <div className="p-2">
-            <p className="text-lg text-zinc-50">
-              {pizzaQuantity > 1 ? `${pizzaQuantity} ` : ""}
-              {sizeToInches[pizzaSize]}&quot; {pizzaCrust} {specialtyPizza}{" "}
-              {pizzaQuantity > 1 ? "pizzas" : "pizza"}
-              {pizzaCrustFlavor !== "None"
-                ? ` with ${pizzaCrustFlavor} crust`
-                : ""}
-            </p>
+            <p className="text-lg text-zinc-50">{pizzaDescription}</p>
             {specialBake !== "Normal" && (
               <p className="text-lg font-semibold text-zinc-50">
                 **{specialBake}**
@@ -282,9 +286,9 @@ const CreateSpecialtyPizzaOrder: React.FC = () => {
                           removedToppings: [],
                           price: specialtyPizzaPrice(pizzaQuantity, pizzaSize)
                             .number,
+                          description: pizzaDescription,
                         },
                       ],
-                      customerName: orderState.customerName,
                     },
                   });
                 }}

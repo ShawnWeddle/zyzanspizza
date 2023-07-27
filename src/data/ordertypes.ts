@@ -4,84 +4,91 @@ import type {
 } from "./names";
 
 
-type PizzaSizeList = typeof pizzaSizeList[number];
-type PizzaCrustList = typeof pizzaCrustList[number];
-type PizzaSauceList = typeof pizzaSauceList[number];
-type PizzaToppingsList = typeof pizzaToppingsList[number];
-type PizzaCrustFlavorList = typeof pizzaCrustFlavorList[number];
-type SpecialBakeList = typeof specialBakeList[number];
-type SpecialCutList = typeof specialCutList[number];
+export type PizzaSizeListType = typeof pizzaSizeList[number];
+export type PizzaCrustListType = typeof pizzaCrustList[number];
+export type PizzaSauceListType = typeof pizzaSauceList[number];
+export type PizzaToppingsListType = typeof pizzaToppingsList[number];
+export type PizzaCrustFlavorListType = typeof pizzaCrustFlavorList[number];
+export type SpecialBakeListType = typeof specialBakeList[number];
+export type SpecialCutListType = typeof specialCutList[number];
 
-type WingsSizeList = typeof wingsSizeList[number];
-type WingsSauceList = typeof wingsSauceList[number];
-type SidesOptionsList = typeof sidesOptionsList[number];
-type SidesSizeList = typeof breadBallsSizeList[number] | typeof breadsticksSizeList[number] | null;
-type DessertsOptionsList = typeof dessertsOptionsList[number];
-type DrinksOptionsList = typeof drinksOptionsList[number];
-type DrinksSizeList = typeof drinksSizeList[number];
-type SauceOptionsList = typeof sauceOptionsList[number];
+export type WingsSizeListType = typeof wingsSizeList[number];
+export type WingsSauceListType = typeof wingsSauceList[number];
+export type WingsBoneListType = "Bone-in" | "Boneless";
+export type SidesOptionsListType = typeof sidesOptionsList[number];
+export type SidesSizeListType = typeof breadBallsSizeList[number] | typeof breadsticksSizeList[number] | "1-piece";
+export type DessertsOptionsListType = typeof dessertsOptionsList[number];
+export type DrinksOptionsListType = typeof drinksOptionsList[number];
+export type DrinksSizeListType = typeof drinksSizeList[number];
+export type SauceOptionsListType = typeof sauceOptionsList[number];
 
-type SpecialtyPizzaNameType = typeof specialtyPizzaNameList[number];
+export type SpecialtyPizzaNameType = typeof specialtyPizzaNameList[number];
 
 export type PizzaType = {
   id: string;
   foodType: "PIZZA";
-  size: PizzaSizeList;
-  crust: PizzaCrustList;
-  sauce: PizzaSauceList;
-  toppings: PizzaToppingsList[] | SpecialtyToppingsType[];
-  crustFlavor: PizzaCrustFlavorList;
+  size: PizzaSizeListType;
+  crust: PizzaCrustListType;
+  sauce: PizzaSauceListType;
+  toppings: PizzaToppingsListType[] | SpecialtyToppingsType[];
+  crustFlavor: PizzaCrustFlavorListType;
   quantity: number;
-  specialBakeInstructions: SpecialBakeList;
-  specialCutInstructions: SpecialCutList;
+  specialBakeInstructions: SpecialBakeListType;
+  specialCutInstructions: SpecialCutListType;
   isSpecialtyPizza: boolean;
   specialtyPizzaName?: SpecialtyPizzaNameType;
-  removedToppings: PizzaToppingsList[] | SpecialtyToppingsType[];
+  removedToppings: PizzaToppingsListType[] | SpecialtyToppingsType[];
   price: number;
+  description: string;
 }
 
 export type WingsType = {
   id: string;
   foodType: "WINGS";
-  size: WingsSizeList;
+  size: WingsSizeListType;
   bone: boolean;
-  sauce: WingsSauceList;
+  sauce: WingsSauceListType;
   quantity: number;
   price: number;
+  description: string;
 }
 
 export type SidesType = {
   id: string;
   foodType: "SIDES";
-  sideOption: SidesOptionsList;
-  size: SidesSizeList;
+  sideOption: SidesOptionsListType;
+  size: SidesSizeListType;
   quantity: number;
   price: number;
+  description: string;
 }
 
 export type DessertsType = {
   id: string;
   foodType: "DESSERTS";
-  dessertOption: DessertsOptionsList;
+  dessertOption: DessertsOptionsListType;
   quantity: number;
   price: number;
+  description: string;
 }
 
 export type DrinksType = {
   id: string;
   foodType: "DRINKS";
-  drinkOption: DrinksOptionsList;
-  size: DrinksSizeList;
+  drinkOption: DrinksOptionsListType;
+  size: DrinksSizeListType;
   quantity: number;
   price: number;
+  description: string;
 }
 
 export type SaucesType = {
   id: string;
   foodType: "SAUCES";
-  sauceOption: SauceOptionsList;
+  sauceOption: SauceOptionsListType;
   quantity: number;
   price: number;
+  description: string;
 }
 
 export type FoodTypes = "PIZZA" | "WINGS" | "SIDES" | "DESSERTS" | "DRINKS" | "SAUCES";
@@ -95,6 +102,14 @@ export type FullOrderType = {
   Desserts: DessertsType[];
   Drinks: DrinksType[];
   Sauces: SaucesType[];
-  customerName: string | null;
 }
 
+export type UserType = {
+  token: string;
+  userId: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+};
+
+export type CustomerType = Omit<UserType, "token">;

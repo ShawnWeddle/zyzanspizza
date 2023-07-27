@@ -17,16 +17,17 @@ model User {
 }
 
 model Order {
-  id           String     @id @default(auto()) @map("_id") @db.ObjectId
-  User         User?      @relation(fields: [userId], references: [id])
-  userId       String?    @db.ObjectId
-  customerName String
-  pizzas       Pizza[]
-  wings        Wings[]
-  sides        Sides[]
-  desserts     Desserts[]
-  drinks       Drinks[]
-  sauces       Sauces[]
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  createdAt DateTime   @default(now())
+  User      User       @relation(fields: [userId], references: [id])
+  userId    String     @db.ObjectId
+  customer  Customer
+  pizzas    Pizza[]
+  wings     Wings[]
+  sides     Sides[]
+  desserts  Desserts[]
+  drinks    Drinks[]
+  sauces    Sauces[]
 }
 
 type Pizza {
@@ -44,25 +45,28 @@ type Pizza {
   specialtyPizzaName      String?
   removedToppings         String[]
   price                   Float
+  description             String
 }
 
 type Wings {
-  id       String
-  foodType String
-  size     String
-  bone     Boolean
-  sauce    String
-  quantity Int
-  price    Float
+  id          String
+  foodType    String
+  size        String
+  bone        Boolean
+  sauce       String
+  quantity    Int
+  price       Float
+  description String
 }
 
 type Sides {
-  id         String
-  foodType   String
-  sideOption String
-  size       String
-  quantity   Int
-  price      Float
+  id          String
+  foodType    String
+  sideOption  String
+  size        String
+  quantity    Int
+  price       Float
+  description String
 }
 
 type Desserts {
@@ -71,6 +75,7 @@ type Desserts {
   dessertOption String
   quantity      Int
   price         Float
+  description   String
 }
 
 type Drinks {
@@ -80,6 +85,7 @@ type Drinks {
   size        String
   quantity    Int
   price       Float
+  description String
 }
 
 type Sauces {
@@ -88,4 +94,12 @@ type Sauces {
   sauceOption String
   quantity    Int
   price       Float
+  description String
+}
+
+type Customer {
+  userId    String
+  firstName String
+  lastName  String
+  email     String
 }
