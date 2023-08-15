@@ -218,7 +218,7 @@ const CreateSpecialtyPizzaOrder: React.FC = () => {
   });
 
   return (
-    <div className="mt-4">
+    <div className="mt-4 grow">
       <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
         <div className="mb-4 flex w-full flex-col justify-between bg-gradient-to-br from-green-700 to-green-800 sm:rounded-xl">
           <div className="p-2">

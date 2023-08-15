@@ -30,6 +30,7 @@ export const publicProcedure = t.procedure;
 
 const requireUserAuth = t.middleware(({ ctx, next }) => {
   const {req} = ctx;
+
   let token;
 
   if (

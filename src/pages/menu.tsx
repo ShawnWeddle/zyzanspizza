@@ -8,6 +8,7 @@ import SidesMenu from "~/components/Menu/Sides";
 import DessertsMenu from "~/components/Menu/Desserts";
 import DrinksMenu from "~/components/Menu/Drinks";
 import SaucesMenu from "~/components/Menu/Sauces";
+import Footer from "~/components/Footer";
 
 const Menu: NextPage = () => {
   return (
@@ -19,7 +20,6 @@ const Menu: NextPage = () => {
       </Head>
       <main className="dark flex min-h-screen flex-col items-center bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-50 sm:bg-gradient-to-r sm:from-zinc-50 sm:via-amber-50 sm:to-zinc-50 dark:sm:bg-gradient-to-br dark:sm:from-zinc-700 dark:sm:to-zinc-800">
         <NavBar />
-        <div className="h-16"></div>
         <PizzaMenu />
         <SpecialtyPizzasMenu />
         <WingsMenu />
@@ -27,6 +27,7 @@ const Menu: NextPage = () => {
         <DessertsMenu />
         <DrinksMenu />
         <SaucesMenu />
+        <Footer />
       </main>
     </>
   );

@@ -12,7 +12,7 @@ const SaucesMenu: React.FC = () => {
     );
   });
   return (
-    <div className="flex flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
+    <div className="flex grow flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
       <div className="text-6xl font-semibold">SAUCES</div>
       <div className="m-2 text-center text-xl">
         <span className="font-bold"> $0.75 </span> each

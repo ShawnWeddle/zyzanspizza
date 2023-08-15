@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 import { useOrderContext } from "~/hooks/useOrderContext";
 import { useAuthContext } from "~/hooks/useAuthContext";
-import { api } from "~/utils/api";
+import { api, setToken } from "~/utils/api";
 import {
   PizzaInCartSpan,
   WingsInCartSpan,
@@ -223,7 +223,7 @@ const CheckoutList: React.FC = () => {
   ];
 
   return (
-    <div className="mt-2 w-full sm:max-w-screen-sm">
+    <div className="mt-2 w-full grow sm:max-w-screen-sm">
       <div className="relative bg-gradient-to-br from-green-700 to-green-800 p-2 text-center text-4xl text-zinc-50 sm:rounded-t">
         <div className="absolute top-4 left-2">
           <div className="text-base">

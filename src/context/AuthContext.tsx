@@ -33,7 +33,9 @@ export const authReducer = (
             lastName: action.payload.lastName,
           })
         );
+        setToken(action.payload.token);
       }
+
       return { user: action.payload };
     }
     case "LOGOUT": {

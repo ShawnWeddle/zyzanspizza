@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { pizzaToppingsList } from "~/data/names";
 
 const PizzaMenu: React.FC = () => {
@@ -7,7 +6,7 @@ const PizzaMenu: React.FC = () => {
   });
 
   return (
-    <div className="flex flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
+    <div className="flex grow flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
       <div className="m-2 text-6xl font-semibold">PIZZA</div>
       <div className="m-2 grid grid-cols-1 md:grid-cols-2">
         <div>

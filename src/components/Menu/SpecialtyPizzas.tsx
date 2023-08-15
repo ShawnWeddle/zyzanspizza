@@ -1,4 +1,3 @@
-import Image from "next/image";
 import { specialtyPizzaDescriptions } from "~/data/names";
 
 const SpecialtyPizzasMenu: React.FC = () => {
@@ -15,7 +14,7 @@ const SpecialtyPizzasMenu: React.FC = () => {
     );
   });
   return (
-    <div className="flex flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
+    <div className="flex grow flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
       <div className="m-2 flex flex-col gap-4 text-center text-6xl font-semibold sm:flex-row">
         <span>SPECIALTY</span>
         <span>PIZZAS</span>

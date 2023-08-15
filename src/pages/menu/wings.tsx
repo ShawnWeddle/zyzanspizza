@@ -3,6 +3,7 @@ import Head from "next/head";
 import { useRouter } from "next/router";
 import NavBar from "~/components/Nav";
 import WingsMenu from "~/components/Menu/Wings";
+import Footer from "~/components/Footer";
 
 const Wings: NextPage = () => {
   const router = useRouter();
@@ -15,7 +16,6 @@ const Wings: NextPage = () => {
       </Head>
       <main className="dark flex min-h-screen flex-col items-center bg-zinc-50 dark:bg-zinc-800 dark:text-zinc-50 sm:bg-gradient-to-r sm:from-zinc-50 sm:via-amber-50 sm:to-zinc-50 dark:sm:bg-gradient-to-br dark:sm:from-zinc-700 dark:sm:to-zinc-800">
         <NavBar />
-        <div className="h-16"></div>
         <WingsMenu />
         <button
           className="p-1 text-xl font-semibold hover:text-green-800"
@@ -25,6 +25,7 @@ const Wings: NextPage = () => {
         >
           🡄 View Full Menu
         </button>
+        <Footer />
       </main>
     </>
   );

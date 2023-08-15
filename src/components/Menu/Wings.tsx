@@ -1,8 +1,6 @@
-import Image from "next/image";
-
 const WingsMenu: React.FC = () => {
   return (
-    <div className="flex flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
+    <div className="flex grow flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
       <div className="m-2 text-6xl font-semibold">WINGS</div>
       <div className="grid grid-cols-1 sm:m-2 sm:grid-cols-2 sm:gap-2">
         <div>

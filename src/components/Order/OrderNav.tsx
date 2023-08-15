@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { orderCategories } from "~/data/names";
 import CreatePizzaOrder from "./CreateFoodItem/CreatePizza";
-import OrderSpecialtyPizza from "./OrderFoodItem/OrderSpecialtyPizza";
+import CreateSpecialtyPizzaOrder from "./CreateFoodItem/CreateSpecialtyPizza";
 import OrderWings from "./OrderFoodItem/OrderWings";
 import OrderSides from "./OrderFoodItem/OrderSides";
 import OrderDesserts from "./OrderFoodItem/OrderDesserts";
@@ -37,7 +37,7 @@ const OrderNav: React.FC = () => {
     }
   });
   return (
-    <div className="w-full sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
+    <div className="w-full grow sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
       <div className="flex flex-wrap justify-center sm:gap-2">
         <div className="flex sm:gap-2">
           {orderButtons[0]}
@@ -53,7 +53,7 @@ const OrderNav: React.FC = () => {
       </div>
       <div className="my-2 h-0.5 bg-green-800 lg:my-0"></div>
       {activeCategory === "Create your own pizza" && <CreatePizzaOrder />}
-      {activeCategory === "Specialty Pizzas" && <OrderSpecialtyPizza />}
+      {activeCategory === "Specialty Pizzas" && <CreateSpecialtyPizzaOrder />}
       {activeCategory === "Wings" && <OrderWings />}
       {activeCategory === "Sides" && <OrderSides />}
       {activeCategory === "Desserts" && <OrderDesserts />}

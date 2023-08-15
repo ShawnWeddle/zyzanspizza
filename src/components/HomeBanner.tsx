@@ -1,6 +1,8 @@
 import Image from "next/image";
+import { useRouter } from "next/router";
 
 const HomeBanner: React.FC = () => {
+  const router = useRouter();
   return (
     <div className="relative mt-10 sm:mt-0">
       <Image
@@ -16,7 +18,10 @@ const HomeBanner: React.FC = () => {
         </div>
       </div>
       <div className="absolute bottom-10 right-10">
-        <button className="rounded-xl bg-gradient-to-br from-white to-gray-100 p-3 text-2xl font-bold italic text-green-700 shadow-md shadow-white hover:bg-gradient-to-br hover:from-gray-100 hover:to-green-100 hover:text-green-800 sm:text-3xl md:text-4xl">
+        <button
+          className="rounded-xl bg-gradient-to-br from-white to-gray-100 p-3 text-2xl font-bold italic text-green-700 shadow-md shadow-white hover:bg-gradient-to-br hover:from-gray-100 hover:to-green-100 hover:text-green-800 sm:text-3xl md:text-4xl"
+          onClick={() => void router.push("/order")}
+        >
           ORDER ONLINE
         </button>
       </div>

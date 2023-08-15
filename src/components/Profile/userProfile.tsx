@@ -45,7 +45,7 @@ const UserProfile: React.FC<UserProfileProps> = (props: UserProfileProps) => {
   });
 
   return (
-    <div className="mt-2 w-full sm:max-w-screen-sm">
+    <div className="mt-2 w-full grow sm:max-w-screen-sm">
       <div className="bg-gradient-to-br from-blue-700 to-blue-800 p-2 text-center text-4xl text-zinc-50 sm:rounded-t">
         {user?.firstName} {user?.lastName}
       </div>

@@ -12,7 +12,7 @@ const DrinksMenu: React.FC = () => {
     );
   });
   return (
-    <div className="flex flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
+    <div className="flex grow flex-col items-center sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
       <div className="m-2 text-6xl font-semibold">DRINKS</div>
       <div className="m-1 text-center text-xl">
         20 oz <span className="font-bold"> $1.99 </span> ◆ 2-liter{" "}

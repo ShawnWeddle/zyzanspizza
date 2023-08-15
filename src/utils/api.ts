@@ -19,9 +19,7 @@ const getBaseUrl = () => {
 export const api = createTRPCNext<AppRouter>({
   config() {
     return {
-
       transformer: superjson,
-
       links: [
         loggerLink({
           enabled: (opts) =>
