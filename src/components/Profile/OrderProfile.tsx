@@ -21,6 +21,7 @@ const OrderProfile: React.FC<OrderProfileProps> = (
     drinks,
     sauces,
     createdAt,
+    number,
     id: orderId,
   } = order;
 
@@ -125,7 +126,9 @@ const OrderProfile: React.FC<OrderProfileProps> = (
   return (
     <div className="relative my-1">
       <div className="flex justify-between bg-gradient-to-r from-blue-700 to-blue-800 text-white">
-        <p className="px-1">Order placed {createdAt.toLocaleString()}</p>
+        <p className="px-1">
+          Order #{number} placed {createdAt.toLocaleString()}
+        </p>
         <button
           className="px-1"
           onClick={() => {

@@ -1,6 +1,6 @@
 import { z } from "zod";
 import { orderSchema } from "../order/schema";
-import { createOrderHandler, findAllOrders, deleteOrderHandler } from "../order/controller";
+import { createOrderHandler, findAllUserOrders, findAllOrders, deleteOrderHandler } from "../order/controller";
 
 import { createTRPCRouter, privateProcedure, publicProcedure } from "../trpc";
 
@@ -11,7 +11,10 @@ export const orderRouter = createTRPCRouter({
 
   findOrders: publicProcedure
   .input(z.string())
-  .query(({ input }) => findAllOrders({ input })),
+  .query(({ input }) => findAllUserOrders({ input })),
+
+  findAllOrders: publicProcedure
+  .query(() => findAllOrders()),
 
   deleteOrder: privateProcedure
   .input(z.string())

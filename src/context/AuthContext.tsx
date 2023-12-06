@@ -40,6 +40,7 @@ export const authReducer = (
     }
     case "LOGOUT": {
       localStorage.removeItem("user");
+      setToken("");
       return { user: null };
     }
     default:

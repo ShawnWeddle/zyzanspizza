@@ -7,8 +7,8 @@ const HomeBanner: React.FC = () => {
     <div className="relative mt-10 sm:mt-0">
       <Image
         src="/pizza-main.png"
-        width={4800}
-        height={2700}
+        width={1920}
+        height={1275}
         alt=""
         className="h-72 w-screen object-cover sm:h-96"
       />

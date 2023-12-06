@@ -24,7 +24,11 @@ export const findOrders = async (
   return (await prisma.order.findMany({
     where,
     select,
-  })) as Order[];
+  }));
+};
+
+export const findAllOrders = async () => {
+  return (await prisma.order.findMany());
 };
 
 export const findUniqueOrder = async (

@@ -81,7 +81,8 @@ export const orderSchema = z.object({
     email: z.string(),
     firstName: z.string(),
     lastName: z.string(),
-  })
+  }),
+  number: z.number(),
 })
 
 export type OrderInput = TypeOf<typeof orderSchema>;

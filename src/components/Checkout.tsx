@@ -33,26 +33,43 @@ const CheckoutList: React.FC = () => {
 
   const placeOrder = api.order.createOrder.useMutation();
 
+  const returnOrders = api.order.findAllOrders.useQuery();
+
   const handleSubmit = () => {
     const orderValidation = orderSchema.safeParse(orderState);
     if (user && orderValidation) {
-      placeOrder.mutate(
-        {
-          ...orderState,
-          customer: user,
-        },
-        {
-          onSuccess() {
-            setHasCheckedOut(true);
-            orderDispatch({
-              type: "REMOVE",
-              payload: {
-                order: [...allFoodItems],
-              },
-            });
+      if (returnOrders.data?.status) {
+        //Find highest order number
+        const { orders } = returnOrders.data.data;
+
+        const newOrderNumber =
+          orders.length > 0
+            ? Math.max(
+                ...orders.map((order) => {
+                  return order.number;
+                })
+              ) + 1
+            : 1;
+
+        placeOrder.mutate(
+          {
+            ...orderState,
+            customer: user,
+            number: newOrderNumber,
           },
-        }
-      );
+          {
+            onSuccess() {
+              setHasCheckedOut(true);
+              orderDispatch({
+                type: "REMOVE",
+                payload: {
+                  order: [...allFoodItems],
+                },
+              });
+            },
+          }
+        );
+      }
     }
   };
 

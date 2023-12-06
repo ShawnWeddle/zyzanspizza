@@ -7,7 +7,7 @@ import { MdAccountCircle } from "react-icons/md";
 
 const NavBar: React.FC = () => {
   const router = useRouter();
-  const { authState, authDispatch } = useAuthContext();
+  const { authState } = useAuthContext();
   const user = authState.user;
   const { orderState } = useOrderContext();
   return (
@@ -40,7 +40,7 @@ const NavBar: React.FC = () => {
         <div className="flex justify-center">
           <div>
             <button
-              onClick={() => void router.push("/")}
+              onClick={() => void router.push("/about")}
               className="px-2 py-5 hover:bg-green-900 sm:hidden"
             >
               ABOUT
@@ -48,7 +48,7 @@ const NavBar: React.FC = () => {
           </div>
           <div>
             <button
-              onClick={() => void router.push("/")}
+              onClick={() => void router.push("/about")}
               className="hidden px-2 py-5 hover:bg-green-900 sm:block"
             >
               ABOUT US

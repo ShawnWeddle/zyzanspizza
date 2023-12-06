@@ -1,4 +1,4 @@
-import { createOrder, findOrders, deleteOrder } from "./service";
+import { createOrder, findOrders, findAllOrders as allOrders, deleteOrder } from "./service";
 import type { OrderInput } from "./schema";
 
 export const createOrderHandler = async ({
@@ -15,6 +15,7 @@ export const createOrderHandler = async ({
       drinks: input.Drinks,
       sauces: input.Sauces,
       customer: input.customer,
+      number: input.number,
       User: {
         connect: {
           id: input.customer.userId
@@ -33,7 +34,7 @@ export const createOrderHandler = async ({
   }
 }
 
-export const findAllOrders = async({
+export const findAllUserOrders = async({
   input
 } : {
   input: string
@@ -42,6 +43,21 @@ export const findAllOrders = async({
     const orders = await findOrders({
       userId: input
     })
+
+    return{
+      status: "success",
+      data: {
+        orders
+      }
+    }
+  } catch (error) {
+    throw error;
+  }
+}
+
+export const findAllOrders = async() => {
+  try {
+    const orders = await allOrders();
 
     return{
       status: "success",
