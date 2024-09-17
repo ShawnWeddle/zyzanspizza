@@ -21,26 +21,9 @@ const About: NextPage = () => {
         <AboutBanner />
         <div className="m-4 sm:max-w-screen-sm md:max-w-screen-md lg:max-w-screen-lg">
           <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem commodi ea ullam ab, necessitatibus veritatis beatae
-            quos nemo, quaerat quod possimus illo nihil minus vitae earum. Odit,
-            velit. Libero ullam laboriosam asperiores tempora sit consequuntur
-            possimus quos quod nihil veniam temporibus voluptates alias commodi
-            pariatur, qui voluptatem enim consequatur quas.
+            Thank you for visiting zyzans.com! More info coming soon...
           </p>
-          <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit.
-            Exercitationem commodi ea ullam ab, necessitatibus veritatis beatae
-            quos nemo, quaerat quod possimus illo nihil minus vitae earum. Odit,
-            velit. Libero ullam laboriosam asperiores tempora sit consequuntur
-            possimus quos quod nihil veniam temporibus voluptates alias commodi
-            pariatur, qui voluptatem enim consequatur quas.
-          </p>
-          <p>
-            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsum esse
-            vitae pariatur voluptatibus, atque beatae a? Aspernatur, dolorum
-            similique a dignissimos maxime aliquid necessitatibus veniam!
-          </p>
+        
         </div>
         <div className="m-6 text-2xl font-semibold">Explore Our Menu</div>
         <ExploreMenu />

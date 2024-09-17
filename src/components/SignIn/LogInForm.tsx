@@ -2,7 +2,6 @@ import { useState } from "react";
 import { api } from "../../utils/api";
 import { logInUserSchema } from "~/server/api/auth/schema";
 import { useAuthContext } from "~/hooks/useAuthContext";
-import { useOrderContext } from "~/hooks/useOrderContext";
 
 type SignInModeType = "LOG-IN" | "REGISTER";
 
